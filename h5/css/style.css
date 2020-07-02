@@ -1,0 +1,49 @@
+/* index css style */
+
+.root {
+    --font-size: 14px;
+}
+
+.page {
+    width: 100vw;
+    height: 100vh;
+    padding-top: 40vh;
+}
+
+.input-box {
+    margin: 10px 3vw;
+    border: 1px solid #dcdfe6;
+    border-radius: 3px;
+    font-size: 14px;
+    display: flex;
+}
+
+.input-box .input {
+    border: none;
+    flex: 1;
+    padding-left: 10px;
+    height: 40px;
+    line-height: 40px;
+    color: #323232;
+}
+
+.input-box .icon {
+    width: 42px;
+    height: 40px;
+    padding: 10px;
+}
+
+.input-box .icon.upload {
+    border-left: 1px solid #dcdfe6;
+}
+
+.search {
+    display: inline-block;
+    background: #d52a23;
+    color: #fff;
+    text-align: center;
+    margin: 0 3vw;
+    width: 94vw;
+    border-radius: 3px;
+    padding: 10px 0;
+}
