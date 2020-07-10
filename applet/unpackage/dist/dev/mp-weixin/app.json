@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/home/index",
     "pages/basics/layout",
     "pages/basics/background",
     "pages/basics/text",
@@ -35,9 +36,12 @@
     "navigationBarTextStyle": "white"
   },
   "usingComponents": {
+    "home": "/pages/home/index",
+    "user": "/pages/user/index",
     "basics": "/pages/basics/home",
     "components": "/pages/component/home",
     "plugin": "/pages/plugin/home",
     "cu-custom": "/colorui/components/cu-custom"
-  }
+  },
+  "sitemapLocation": "sitemap11.json"
 }

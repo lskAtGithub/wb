@@ -33,7 +33,7 @@
 		display: flex;
 		margin: 20upx 40upx;
 		font-size: 28upx;
-		height: 70upx;
+		height: 72upx;
 		line-height: 70upx;
 	}
 	.content .input-in{
