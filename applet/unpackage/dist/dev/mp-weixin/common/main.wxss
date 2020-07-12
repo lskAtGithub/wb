@@ -4685,6 +4685,8 @@ scroll-view.cu-steps .cu-item {
 
 .page{
 	padding-top: 80rpx;
+	height: 100vh;
+	background-color: #fff;
 }
 .content{
 	display: -webkit-box;

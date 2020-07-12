@@ -49,6 +49,9 @@
 				]
 			};
 		},
+		onShow() {
+			console.log(123);
+		},
 		methods: {
 			toChild(e) {
 				uni.navigateTo({

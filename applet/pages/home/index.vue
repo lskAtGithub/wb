@@ -4,7 +4,7 @@
 			<view class="input-in">
 				<input type="text" class="input" maxlength="17" placeholder="请输入17位车架号VIN码">
 			</view>
-			<view class="icons">
+			<view class="icons" @tap="upload">
 				<text class='cuIcon-camera icon'></text>
 			</view>
 		</view>
@@ -23,11 +23,38 @@
 </template>
 
 <script>
+	export default {
+		data(){
+			return {}
+		},
+		methods:{
+			upload(){
+				uni.chooseImage({
+				    success: (chooseImageRes) => {
+				        const tempFilePaths = chooseImageRes.tempFilePaths;
+				        uni.uploadFile({
+				            url: 'https://www.example.com/upload', //仅为示例，非真实的接口地址
+				            filePath: tempFilePaths[0],
+				            name: 'file',
+				            formData: {
+				                'user': 'test'
+				            },
+				            success: (uploadFileRes) => {
+				                console.log(uploadFileRes.data);
+				            }
+				        });
+				    }
+				});
+			}
+		}
+	}
 </script>
 
 <style>
 	.page{
 		padding-top: 80upx;
+		height: 100vh;
+		background-color: #fff;
 	}
 	.content{
 		display: flex;

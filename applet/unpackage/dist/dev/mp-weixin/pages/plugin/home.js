@@ -165,6 +165,9 @@ var _default =
 
 
   },
+  onShow: function onShow() {
+    console.log(123);
+  },
   methods: {
     toChild: function toChild(e) {
       uni.navigateTo({
