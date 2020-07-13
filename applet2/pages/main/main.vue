@@ -12,7 +12,7 @@
 			<view class="input-in">
 				<input type="text" class="input" maxlength="17" placeholder="查询车辆">
 			</view>
-			<view class="icons">
+			<view class="icons l-none">
 				<image src="../../static/img/right.png" class="icon"></image>
 			</view>
 		</view>
