@@ -1,1 +1,1 @@
-<view class="_div"></view>
+<view class="page"><block wx:for="{{topbarList}}" wx:for-item="itme" wx:for-index="index" wx:key="index"><view class="topbar">{{item.title}}</view></block><view class="lists"><list class="list" vue-id="31c7be80-1" bind:__l="__l"></list></view></view>

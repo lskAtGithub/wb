@@ -1,0 +1,8 @@
+
+.lists {}
+.lists .list{
+	background-color: rgb(247,247,255);
+	padding: 60rpx 40rpx;
+	border-radius: 8rpx;
+}
+
