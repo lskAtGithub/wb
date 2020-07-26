@@ -5,20 +5,26 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
 	state: {
-		/**
-		 * 是否需要强制登录
-		 */
-		forcedLogin: false,
 		hasLogin: false,
-		userName: ""
+		url: 'https://qscc.halopay.cn',
+		token: '',
+		info: {
+			nickName: '',
+			gender: '',
+			avatar: ''
+		}
 	},
 	mutations: {
-		login(state, userName) {
-			state.userName = userName || '新用户';
+		saveInfo(state, info){
+			state.info = info
+		},
+		saveToken(state,token){
+			state.token = token
+		},
+		login(state) {
 			state.hasLogin = true;
 		},
 		logout(state) {
-			state.userName = "";
 			state.hasLogin = false;
 		}
 	}

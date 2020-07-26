@@ -159,7 +159,7 @@ var _service = _interopRequireDefault(__webpack_require__(/*! ../../service.js *
 //
 //
 //
-var mInput = function mInput() {__webpack_require__.e(/*! require.ensure | components/m-input */ "components/m-input").then((function () {return resolve(__webpack_require__(/*! ../../components/m-input.vue */ 56));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { components: { mInput: mInput }, data: function data() {return { email: '' };}, methods: { findPassword: function findPassword() {/**
+var mInput = function mInput() {__webpack_require__.e(/*! require.ensure | components/m-input */ "components/m-input").then((function () {return resolve(__webpack_require__(/*! ../../components/m-input.vue */ 58));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { components: { mInput: mInput }, data: function data() {return { email: '' };}, methods: { findPassword: function findPassword() {/**
                                                                                                                                                                                                                                                                                                       * 仅做示例
                                                                                                                                                                                                                                                                                                       */if (this.email.length < 3 || !~this.email.indexOf('@')) {
         uni.showToast({

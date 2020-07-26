@@ -1,15 +1,17 @@
 <template>
 	<view class="content">
 		<view class="info-box">
-			<!-- <button v-if="!hasLogin" type="primary" class="primary" @tap="bindLogin">登录</button>
-			<button v-if="hasLogin" type="default" @tap="bindLogout">退出登录</button> -->
 			<view class="avatar-box">
-				<image src="../../static/img/empty.png" class="avatar"></image>
+				<image v-if="!hasLogin" src="../../static/img/empty.png" class="avatar"></image>
+				<image v-else :src="info.avatar" class="avatar"></image>
 			</view>
-			<view  class="info">
-				<view class="name">{{ nickName }}</view>
-				<view>{{gender}}</view>
+			<view  class="info" v-if="hasLogin">
+				<view class="name">{{ info.nickName }}</view>
+				<view>{{info.gender}}</view>
 			</view>
+			<button open-type="getUserInfo" @getuserinfo="getUserInfo" class="info get-info-btn" v-else>
+				登录
+			</button>
 		</view>
 		<view class="lists">
 			<view class="list">
@@ -28,44 +30,62 @@
 </template>
 
 <script>
-	import {
-		mapState,
-		mapMutations
-	} from 'vuex'
+	import { mapState, mapMutations } from 'vuex'
 
 	export default {
 		computed: {
-			...mapState(['hasLogin', 'forcedLogin'])
+			...mapState(['hasLogin', 'forcedLogin','url','token','info'])
 		},
-		data(){
-			return {
-				nickName: '披荆斩棘',
-				gender: '男'
-			}
+		onLoad() {
+			this.getUserInfo()
 		},
 		methods: {
-			...mapMutations(['logout']),
-			bindLogin() {
-				uni.navigateTo({
-					url: '../login/login',
-				});
-			},
-			bindLogout() {
-				this.logout();
-				/**
-				 * 如果需要强制登录跳转回登录页面
-				 */
-				if (this.forcedLogin) {
-					uni.reLaunch({
-						url: '../login/login',
+			...mapMutations(['login','saveToken','saveInfo']),
+			getUserInfo(){
+				const that = this
+				uni.login({
+				  provider: 'weixin',
+				  success: function (loginRes) {
+					  uni.getUserInfo({
+						provider: 'weixin',
+						success: function (infoRes) {
+							uni.request({
+								url: that.url + '/api/v1/mini-program/login',
+								method: 'POST',
+								data: {
+									code: loginRes.code,
+									encryptedData: infoRes.encryptedData,
+									iv: infoRes.iv,
+									signature: infoRes.signature,
+									rawData: infoRes.rawData,
+								},
+								success(response) {
+									if(response.data.code === 200){
+										that.saveInfo({
+											nickName: infoRes.userInfo.nickName,
+											gender: infoRes.userInfo.gender === 1 ? '男' : '女' ,
+											avatar: infoRes.userInfo.avatarUrl
+										})
+										that.login()
+										that.saveToken(response.data.data.access_token)
+									}else{
+										that.$showModel(response.data.message)
+									}
+								},
+								fail() {
+									that.$showModel('网络错误，请重试')
+								}
+							})
+						}
 					});
-				}
+				  }
+				});
 			}
 		}
 	}
 </script>
 
-<style>
+<style scoped>
 .content{
 	background: #fff;
 }
@@ -87,6 +107,9 @@
 }
 .info-box .info{
 	font-size: 26upx;
+}
+.info-box .info.get-info-btn{
+	margin: 0;
 }
 .info-box .info .name{
 	font-size: 36upx;

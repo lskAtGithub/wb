@@ -23,51 +23,25 @@
 </template>
 
 <script>
-	import {
-		mapState
-	} from 'vuex'
+	import { mapState } from 'vuex'
 
 	export default {
-		computed: mapState(['forcedLogin', 'hasLogin', 'userName']),
+		computed: { ...mapState(['url', 'token']) },
 		onLoad() {
-			// if (!this.hasLogin) {
-			// 	uni.showModal({
-			// 		title: '未登录',
-			// 		content: '您未登录，需要登录后才能继续',
-			// 		/**
-			// 		 * 如果需要强制登录，不显示取消按钮
-			// 		 */
-			// 		showCancel: !this.forcedLogin,
-			// 		success: (res) => {
-			// 			if (res.confirm) {
-			// 				/**
-			// 				 * 如果需要强制登录，使用reLaunch方式
-			// 				 */
-			// 				if (this.forcedLogin) {
-			// 					uni.reLaunch({
-			// 						url: '../login/login'
-			// 					});
-			// 				} else {
-			// 					uni.navigateTo({
-			// 						url: '../login/login'
-			// 					});
-			// 				}
-			// 			}
-			// 		}
-			// 	});
-			// }
 		},
 		methods: {
 			upload() {
+				const that = this
 				uni.chooseImage({
 					success: (chooseImageRes) => {
-						const tempFilePaths = chooseImageRes.tempFilePaths;
+						console.log(chooseImageRes);
+						const tempFilePaths = chooseImageRes.tempFilePaths; 
 						uni.uploadFile({
-							url: 'https://www.example.com/upload', //仅为示例，非真实的接口地址
+							url: that.url + '/api/v1/file/images',
 							filePath: tempFilePaths[0],
 							name: 'file',
-							formData: {
-								'user': 'test'
+							header: {
+								"access-token": that.token
 							},
 							success: (uploadFileRes) => {
 								console.log(uploadFileRes.data);

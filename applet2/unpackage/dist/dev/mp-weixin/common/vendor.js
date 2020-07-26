@@ -1711,20 +1711,26 @@ _vue.default.use(_vuex.default);
 
 var store = new _vuex.default.Store({
   state: {
-    /**
-            * 是否需要强制登录
-            */
-    forcedLogin: false,
     hasLogin: false,
-    userName: "" },
+    url: 'https://qscc.halopay.cn',
+    token: '',
+    info: {
+      nickName: '',
+      gender: '',
+      avatar: '' } },
+
 
   mutations: {
-    login: function login(state, userName) {
-      state.userName = userName || '新用户';
+    saveInfo: function saveInfo(state, info) {
+      state.info = info;
+    },
+    saveToken: function saveToken(state, token) {
+      state.token = token;
+    },
+    login: function login(state) {
       state.hasLogin = true;
     },
     logout: function logout(state) {
-      state.userName = "";
       state.hasLogin = false;
     } } });var _default =
 

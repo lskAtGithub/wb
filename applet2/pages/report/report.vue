@@ -1,6 +1,6 @@
 <template>
 	<view class="page">
-		<view class="topbar" v-for="(itme,index) in topbarList" :key="index">{{item.title}}</view>
+		<view class="topbar" v-for="(item,index) in topbarList" :key="index">{{item.title}}</view>
 		<view class="lists">
 			<list class="list"></list>
 		</view>

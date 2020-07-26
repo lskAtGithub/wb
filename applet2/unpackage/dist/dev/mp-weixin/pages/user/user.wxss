@@ -1,8 +1,8 @@
 
-.content{
+.content.data-v-80842834{
 	background: #fff;
 }
-.info-box{
+.info-box.data-v-80842834{
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;
@@ -14,29 +14,32 @@
 	        justify-content: flex-start;
 	margin: 50rpx 30rpx;
 }
-.info-box .avatar-box{
+.info-box .avatar-box.data-v-80842834{
 	margin-right: 40rpx;
 }
-.info-box .avatar-box .avatar{
+.info-box .avatar-box .avatar.data-v-80842834{
 	width: 80rpx;
 	height: 80rpx;
 	border: 2px solid #f2f2f2;
 	border-radius: 80rpx;
 	box-shadow: 0 0 5rpx;
 }
-.info-box .info{
+.info-box .info.data-v-80842834{
 	font-size: 26rpx;
 }
-.info-box .info .name{
+.info-box .info.get-info-btn.data-v-80842834{
+	margin: 0;
+}
+.info-box .info .name.data-v-80842834{
 	font-size: 36rpx;
 	font-weight: bold;
 }
-.lists{
+.lists.data-v-80842834{
 	box-shadow: 0 0 4px #a3a3a3;
 	border-radius: 8rpx;
 	margin: 0 30rpx;
 }
-.lists .list{
+.lists .list.data-v-80842834{
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;
@@ -48,10 +51,10 @@
 	border-bottom: 1px solid #f3f3f3;
 	position: relative;
 }
-.lists .list:last-child{
+.lists .list.data-v-80842834:last-child{
 	border-bottom: 0;
 }
-.lists .list .share{
+.lists .list .share.data-v-80842834{
 	position: absolute;
 	left: 1;
 	top: 1;
@@ -60,7 +63,7 @@
 	z-index: 2;
 	opacity: 0;
 }
-.lists .list .list-title{
+.lists .list .list-title.data-v-80842834{
 	-webkit-box-flex: 1;
 	-webkit-flex: 1;
 	        flex: 1;
@@ -69,7 +72,7 @@
 	font-size: 28rpx;
 	padding: 0 20rpx;
 }
-.lists .list .icon{
+.lists .list .icon.data-v-80842834{
 	width: 50rpx;
 	height: 50rpx;
 	margin: 0 10rpx;

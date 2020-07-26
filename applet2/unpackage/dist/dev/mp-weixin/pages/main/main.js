@@ -155,58 +155,32 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _vuex = __webpack_require__(/*! vuex */ 12); //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default = { computed: (0, _vuex.mapState)(['forcedLogin', 'hasLogin', 'userName']), onLoad: function onLoad() {// if (!this.hasLogin) {
-    // 	uni.showModal({
-    // 		title: '未登录',
-    // 		content: '您未登录，需要登录后才能继续',
-    // 		/**
-    // 		 * 如果需要强制登录，不显示取消按钮
-    // 		 */
-    // 		showCancel: !this.forcedLogin,
-    // 		success: (res) => {
-    // 			if (res.confirm) {
-    // 				/**
-    // 				 * 如果需要强制登录，使用reLaunch方式
-    // 				 */
-    // 				if (this.forcedLogin) {
-    // 					uni.reLaunch({
-    // 						url: '../login/login'
-    // 					});
-    // 				} else {
-    // 					uni.navigateTo({
-    // 						url: '../login/login'
-    // 					});
-    // 				}
-    // 			}
-    // 		}
-    // 	});
-    // }
-  }, methods: { upload: function upload() {uni.chooseImage({ success: function success(chooseImageRes) {var tempFilePaths = chooseImageRes.tempFilePaths;uni.uploadFile({ url: 'https://www.example.com/upload', //仅为示例，非真实的接口地址
-            filePath: tempFilePaths[0], name: 'file', formData: { 'user': 'test' }, success: function success(uploadFileRes) {console.log(uploadFileRes.data);} });} });
+var _vuex = __webpack_require__(/*! vuex */ 12);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
+
+{
+  computed: _objectSpread({}, (0, _vuex.mapState)(['url', 'token'])),
+  onLoad: function onLoad() {
+  },
+  methods: {
+    upload: function upload() {
+      var that = this;
+      uni.chooseImage({
+        success: function success(chooseImageRes) {
+          console.log(chooseImageRes);
+          var tempFilePaths = chooseImageRes.tempFilePaths;
+          uni.uploadFile({
+            url: that.url + '/api/v1/file/images',
+            filePath: tempFilePaths[0],
+            name: 'file',
+            header: {
+              "access-token": that.token },
+
+            success: function success(uploadFileRes) {
+              console.log(uploadFileRes.data);
+            } });
+
+        } });
+
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
