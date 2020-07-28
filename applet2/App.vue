@@ -1,5 +1,18 @@
 <script>
+	import { mapMutations } from 'vuex';
 	export default {
+		methods: {
+			...mapMutations(['login','saveInfo','saveToken'])
+		},
+		onLaunch() {
+			let userInfo = uni.getStorageSync('userInfo') || '';
+			console.log(userInfo);
+			if (userInfo.nickName) {
+				this.login()
+				this.saveInfo(userInfo)
+				this.saveToken(uni.getStorageSync('token'))
+			}
+		}
 	}
 </script>
 

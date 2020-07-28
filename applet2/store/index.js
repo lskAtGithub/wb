@@ -8,18 +8,26 @@ const store = new Vuex.Store({
 		hasLogin: false,
 		url: 'https://qscc.halopay.cn',
 		token: '',
-		info: {
+		userInfo: {
 			nickName: '',
 			gender: '',
 			avatar: ''
 		}
 	},
 	mutations: {
-		saveInfo(state, info){
-			state.info = info
+		saveInfo(state, provider){
+			state.userInfo = provider
+			uni.setStorage({
+				key: 'userInfo',
+				data: provider
+			})
 		},
-		saveToken(state,token){
-			state.token = token
+		saveToken(state,provider){
+			state.token = provider
+			uni.setStorage({
+				key: 'token',
+				data: provider
+			})
 		},
 		login(state) {
 			state.hasLogin = true;

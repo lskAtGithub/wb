@@ -1704,7 +1704,7 @@ function normalizeComponent (
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
 var _vuex = _interopRequireDefault(__webpack_require__(/*! vuex */ 12));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 _vue.default.use(_vuex.default);
@@ -1714,18 +1714,26 @@ var store = new _vuex.default.Store({
     hasLogin: false,
     url: 'https://qscc.halopay.cn',
     token: '',
-    info: {
+    userInfo: {
       nickName: '',
       gender: '',
       avatar: '' } },
 
 
   mutations: {
-    saveInfo: function saveInfo(state, info) {
-      state.info = info;
+    saveInfo: function saveInfo(state, provider) {
+      state.userInfo = provider;
+      uni.setStorage({
+        key: 'userInfo',
+        data: provider });
+
     },
-    saveToken: function saveToken(state, token) {
-      state.token = token;
+    saveToken: function saveToken(state, provider) {
+      state.token = provider;
+      uni.setStorage({
+        key: 'token',
+        data: provider });
+
     },
     login: function login(state) {
       state.hasLogin = true;
@@ -1737,6 +1745,7 @@ var store = new _vuex.default.Store({
 
 
 store;exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

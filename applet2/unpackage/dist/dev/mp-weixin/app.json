@@ -39,5 +39,9 @@
     ]
   },
   "usingComponents": {},
+<<<<<<< HEAD
   "sitemapLocation": "sitemap5.json"
+=======
+  "sitemapLocation": "sitemap66.json"
+>>>>>>> b098aaa71e4b32875ebde40e589be234dc37377a
 }

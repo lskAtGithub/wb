@@ -3,11 +3,11 @@
 		<view class="info-box">
 			<view class="avatar-box">
 				<image v-if="!hasLogin" src="../../static/img/empty.png" class="avatar"></image>
-				<image v-else :src="info.avatar" class="avatar"></image>
+				<image v-else :src="userInfo.avatar" class="avatar"></image>
 			</view>
 			<view  class="info" v-if="hasLogin">
-				<view class="name">{{ info.nickName }}</view>
-				<view>{{info.gender}}</view>
+				<view class="name">{{ userInfo.nickName }}</view>
+				<view>{{userInfo.gender}}</view>
 			</view>
 			<button open-type="getUserInfo" @getuserinfo="getUserInfo" class="info get-info-btn" v-else>
 				登录
@@ -34,10 +34,12 @@
 
 	export default {
 		computed: {
-			...mapState(['hasLogin', 'forcedLogin','url','token','info'])
+			...mapState(['hasLogin', 'forcedLogin','url','token','userInfo'])
 		},
 		onLoad() {
-			this.getUserInfo()
+			if(!this.hasLogin){
+				this.getUserInfo()
+			}
 		},
 		methods: {
 			...mapMutations(['login','saveToken','saveInfo']),
