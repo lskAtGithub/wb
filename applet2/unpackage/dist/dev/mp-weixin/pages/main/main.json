@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText": "查询",
-  "usingComponents": {}
+  "usingComponents": {
+    "bw-swiper": "/wxcomponents/bw-swiper/bw-swiper"
+  }
 }

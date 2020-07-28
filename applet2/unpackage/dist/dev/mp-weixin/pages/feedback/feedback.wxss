@@ -1,0 +1,96 @@
+.page .lists.data-v-91bba7b4 {
+  width: 80vw;
+  margin: 0 10vw;
+}
+.page .lists .list.data-v-91bba7b4 {
+  background-color: #f7f7ff;
+  margin-top: 20rpx;
+  border-radius: 10rpx;
+  padding: 20rpx;
+}
+.page .lists .list .title.data-v-91bba7b4 {
+  font-size: 30rpx;
+  font-weight: bold;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: center;
+  margin-bottom: 10rpx;
+}
+.page .lists .list .content.data-v-91bba7b4 {
+  font-size: 26rpx;
+  color: #666;
+}
+.page .add-btn.data-v-91bba7b4 {
+  background: transparent;
+  border: 1px solid #000;
+  position: absolute;
+  right: 50rpx;
+  bottom: 50rpx;
+  border-radius: 100rpx;
+  width: 100rpx;
+  height: 100rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  text-align: center;
+  z-index: 66;
+}
+.page .add-btn .add.data-v-91bba7b4 {
+  width: 50rpx;
+  height: 50rpx;
+}
+.page .feed-model.data-v-91bba7b4 {
+  width: 100vw;
+  height: 100vh;
+  z-index: 68;
+  position: fixed;
+  left: 0;
+  top: 0;
+  opacity: .7;
+  background-color: #000;
+}
+.page .feedback-wrap.data-v-91bba7b4 {
+  position: absolute;
+  left: 10vw;
+  top: 40vw;
+  z-index: 99;
+  width: 80vw;
+  background-color: #fff;
+  border-radius: 10rpx;
+  border: 1px solid #ccc;
+}
+.page .feedback-wrap .feed-title.data-v-91bba7b4 {
+  width: 92%;
+  border-bottom: 1px solid #ccc;
+  padding: 18rpx 4%;
+}
+.page .feedback-wrap .feed-content.data-v-91bba7b4 {
+  width: 92%;
+  height: 200rpx;
+  padding: 18rpx 4%;
+  resize: none;
+}
+.page .feedback-wrap .feed-submit.data-v-91bba7b4 {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  border-top: 1px solid #ccc;
+  border-radius: 10rpx;
+  margin-top: 40rpx;
+}
+.page .feedback-wrap .feed-submit text.data-v-91bba7b4 {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  text-align: center;
+  padding: 20rpx 0;
+}
+

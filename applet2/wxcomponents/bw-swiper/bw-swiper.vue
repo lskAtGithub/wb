@@ -174,7 +174,7 @@
 			return {
 				flag:true,
 				cardCur:0,
-				swiperHeight:300
+				swiperHeight:150
 			}
 		},
 		computed:{

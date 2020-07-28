@@ -6,7 +6,7 @@
 		},
 		onLaunch() {
 			let userInfo = uni.getStorageSync('userInfo') || '';
-			console.log(userInfo);
+			console.log(uni.getStorageSync('token'));
 			if (userInfo.nickName) {
 				this.login()
 				this.saveInfo(userInfo)
@@ -16,7 +16,7 @@
 	}
 </script>
 
-<style>
+<style lang="scss">
 
 	/* reset */
 	*{

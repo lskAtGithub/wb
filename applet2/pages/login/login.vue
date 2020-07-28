@@ -187,7 +187,7 @@
 	}
 </script>
 
-<style>
+<style scoped lang="scss">
 	.action-row {
 		display: flex;
 		flex-direction: row;

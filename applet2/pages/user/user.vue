@@ -20,7 +20,12 @@
 				<view class="list-title">分享给好友</view>
 				<image src="../../static/img/right.png" class="icon"></image>
 			</view>
-			<view class="list">
+			<view class="list" @tap="toLink">
+				<image src="../../static/img/fankui.png" class="icon"></image>
+				<view class="list-title">意见反馈</view>
+				<image src="../../static/img/right.png" class="icon"></image>
+			</view>
+			<view class="list" @tap="callPhone">
 				<image src="../../static/img/contact.png" class="icon"></image>
 				<view class="list-title">联系客服</view>
 				<image src="../../static/img/right.png" class="icon"></image>
@@ -36,13 +41,45 @@
 		computed: {
 			...mapState(['hasLogin', 'forcedLogin','url','token','userInfo'])
 		},
-		onLoad() {
-			if(!this.hasLogin){
-				this.getUserInfo()
+		data(){
+			return {
+				phone: ''
 			}
+		},
+		onLoad() {
+			const that = this
+			console.log(this.hasLogin);
+			this.getPhone()
 		},
 		methods: {
 			...mapMutations(['login','saveToken','saveInfo']),
+			toLink(){
+				uni.navigateTo({
+					url: '../feedback/feedback'
+				})
+			},
+			getPhone(){
+				const that = this
+				that.$quest({
+					url: '/api/qscc/v1/member/contact',
+					success:(res)=>{
+						if(res.data.tel){
+							that.phone = res.data.tel
+						}
+					}
+				})
+			},
+			callPhone(){
+				const that = this
+				console.log(this.phone);
+				if(that.phone){
+					uni.makePhoneCall({
+					    phoneNumber:  that.phone.toString(),
+					})
+				}else{
+					that.$showModel('联系电话获取失败，请使用意见反馈')
+				}
+			},
 			getUserInfo(){
 				const that = this
 				uni.login({
@@ -87,7 +124,7 @@
 	}
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .content{
 	background: #fff;
 }

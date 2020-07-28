@@ -5,44 +5,35 @@
 	},
 	"setting": {
 		"urlCheck": false,
-		"scopeDataCheck": false,
-		"coverView": true,
 		"es6": true,
-		"postcss": true,
-		"compileHotReLoad": false,
+		"enhance": false,
+		"postcss": false,
 		"preloadBackgroundData": false,
 		"minified": true,
-		"autoAudits": false,
 		"newFeature": false,
-		"uglifyFileName": false,
-		"uploadWithSourceMap": true,
-		"useIsolateContext": true,
+		"coverView": true,
 		"nodeModules": false,
-		"enhance": false,
-		"useCompilerModule": false,
-		"userConfirmedUseCompilerModuleSwitch": false,
+		"autoAudits": false,
 		"showShadowRootInWxmlPanel": true,
+		"scopeDataCheck": false,
+		"uglifyFileName": false,
 		"checkInvalidKey": true,
 		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"compileHotReLoad": false,
 		"babelSetting": {
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
-<<<<<<< HEAD
 		},
 		"useIsolateContext": true,
-		"useCompilerModule": false,
+		"useCompilerModule": true,
 		"userConfirmedUseCompilerModuleSwitch": false
-=======
-		}
->>>>>>> b098aaa71e4b32875ebde40e589be234dc37377a
 	},
 	"compileType": "miniprogram",
 	"libVersion": "",
 	"appid": "wx251f3baaf6511d58",
 	"projectname": "applet2",
-	"simulatorType": "wechat",
-	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,

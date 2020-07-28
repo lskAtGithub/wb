@@ -18,12 +18,11 @@ Vue.prototype.$showModel = function(content="",complete){
 		}
 	})
 }
-console.log(store._mutations);
 Vue.prototype.$quest = function (obj){
 	if(store.state.token){
 		uni.showLoading()
 		uni.request({
-			url: store.state.url + obj.url + '?access-token=' + store.state.token,
+			url: !obj.noToken ? store.state.url + obj.url + '?access-token=' + store.state.token : store.state.url + obj.url,
 			method: obj.method || "GET",
 			header:obj.header || {
 				"access-token": store.state.token
@@ -31,7 +30,6 @@ Vue.prototype.$quest = function (obj){
 			data: obj.data || {},
 			success(res) {
 				uni.hideLoading()
-				store.commit('logout')
 				if(res.data.code === 401){
 					store.commit('logout')
 					uni.showModal({

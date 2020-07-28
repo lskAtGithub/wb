@@ -17,23 +17,19 @@ const store = new Vuex.Store({
 	mutations: {
 		saveInfo(state, provider){
 			state.userInfo = provider
-			uni.setStorage({
-				key: 'userInfo',
-				data: provider
-			})
+			uni.setStorageSync('userInfo',provider)
 		},
 		saveToken(state,provider){
 			state.token = provider
-			uni.setStorage({
-				key: 'token',
-				data: provider
-			})
+			uni.setStorageSync('token',provider)
 		},
 		login(state) {
 			state.hasLogin = true;
+			uni.setStorageSync('hasLogin',true)
 		},
 		logout(state) {
 			state.hasLogin = false;
+			uni.setStorageSync('hasLogin',false)
 		}
 	}
 })

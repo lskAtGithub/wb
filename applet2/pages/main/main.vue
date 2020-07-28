@@ -24,31 +24,73 @@
 				<image src="../../static/img/right.png" class="icon"></image>
 			</view>
 		</view>
-		<view class="search-box" @click="search">
+		<view class="search-box" @tap="search">
 			<view class="search-btn">查 询</view>
+		</view>
+		<view class="search-box" @tap="pay">
+			<view class="search-btn">支 付</view>
 		</view>
 	</view>
 </template>
 
 <script>
 	import { mapState, mapMutations } from 'vuex'
+	import bwSwiper from '@/wxcomponents/bw-swiper/bw-swiper.vue'
 
 	export default {
 		computed: { ...mapState(['url', 'token']) },
+		components:{
+			bwSwiper
+		},
 		data(){
 			return {
 				swIndex:0,
-				swiperList: [],
+				swiperList: [
+					{
+						type: 'image',
+						img: 'https://tse2-mm.cn.bing.net/th/id/OIP.3Ve6WFCk6Fp-kSzB-2W7LAHaEc?w=311&h=187&c=7&o=5&dpr=1.2&pid=1.7'
+					},
+					{
+						type: 'image',
+						img: 'https://tse4-mm.cn.bing.net/th/id/OIP.SJpXZVwQnWvK7f-kjzDnggHaEK?w=333&h=187&c=7&o=5&dpr=1.2&pid=1.7'
+					}
+				],
 				swiperType: true,
 
-				vinVal: ''
+				vinVal: 'LFMKV30F6B0085121'
 			}
 		},
 		onShow() {
-			this.getBanner()
+			// this.getBanner()
 		},
 		methods: {
 			...mapMutations(['logout']),
+			pay(){
+				const that = this
+				that.$quest({
+					url: '/api/qscc/v1/order/mp-pay',
+					data: {
+						vin: that.vinVal
+					},
+					success:(res)=>{
+						console.log(res);
+						uni.requestPayment({
+						    provider: 'wxpay',
+						    timeStamp: String(Date.now()),
+						    nonceStr: res.data.nonceStr,
+						    package: res.data.package,
+						    signType: 'MD5',
+						    paySign: res.data.paySign,
+						    success: function (res) {
+						        console.log('success:' + JSON.stringify(res));
+						    },
+						    fail: function (err) {
+						        console.log('fail:' + JSON.stringify(err));
+						    }
+						});
+					}
+				})
+			},
 			changItem(e) {
 				this.swIndex = e.detail.current
 			},
@@ -56,6 +98,7 @@
 				const that = this
 				this.$quest({
 					url: '/api/qscc/v1/banner/list',
+					noToken: true,
 					method: 'POST',
 					success:(res)=>{
 						this.swiperList = [] 
@@ -74,10 +117,6 @@
 				const that = this
 				uni.chooseImage({
 					success: (chooseImageRes) => {
-<<<<<<< HEAD
-						const tempFilePaths = chooseImageRes.tempFilePaths; 
-=======
->>>>>>> b098aaa71e4b32875ebde40e589be234dc37377a
 						uni.uploadFile({
 							url: that.url + '/api/v1/file/images?access-token=' + that.token,
 							filePath: chooseImageRes.tempFilePaths[0],
@@ -87,13 +126,6 @@
 								'access-token': that.token,
 								'content-type': 'multipart/form-data'
 							},
-<<<<<<< HEAD
-							data: {
-								
-							},
-=======
-							method: 'POST',
->>>>>>> b098aaa71e4b32875ebde40e589be234dc37377a
 							success: (uploadFileRes) => {
 								var result = JSON.parse(uploadFileRes.data)
 								if(result.code === 401){
@@ -117,7 +149,8 @@
 										},
 										success: (res)=>{
 											if(res.code === 200){
-												that.vinVal = res.data.data[0]
+												console.log(res.data);
+												that.vinVal = res.data[0]
 											}else{
 												that.$showModel(res.data.message)
 											}
@@ -154,7 +187,6 @@
 
 <style lang="scss" scoped>
 	.page{
-			padding-top: 80upx;
 			height: 100vh;
 			background-color: #fff;
 		}
