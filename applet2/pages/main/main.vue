@@ -34,7 +34,6 @@
 				const that = this
 				uni.chooseImage({
 					success: (chooseImageRes) => {
-						console.log(chooseImageRes);
 						const tempFilePaths = chooseImageRes.tempFilePaths; 
 						uni.uploadFile({
 							url: that.url + '/api/v1/file/images',
@@ -42,6 +41,9 @@
 							name: 'file',
 							header: {
 								"access-token": that.token
+							},
+							data: {
+								
 							},
 							success: (uploadFileRes) => {
 								console.log(uploadFileRes.data);
