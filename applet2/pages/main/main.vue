@@ -76,7 +76,7 @@
 						uni.requestPayment({
 								appId: res.data.appId,
 						    provider: 'wxpay',
-						    timeStamp: String(Date.now()),
+						    timeStamp: res.data.timeStamp,
 						    nonceStr: res.data.nonceStr,
 						    package: res.data.package,
 						    signType: 'MD5',
