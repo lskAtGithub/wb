@@ -48,7 +48,6 @@
 		},
 		onLoad() {
 			const that = this
-			console.log(this.hasLogin);
 			this.getPhone()
 		},
 		methods: {

@@ -73,8 +73,8 @@
 						vin: that.vinVal
 					},
 					success:(res)=>{
-						console.log(res);
 						uni.requestPayment({
+								appId: res.data.appId,
 						    provider: 'wxpay',
 						    timeStamp: String(Date.now()),
 						    nonceStr: res.data.nonceStr,
@@ -82,10 +82,10 @@
 						    signType: 'MD5',
 						    paySign: res.data.paySign,
 						    success: function (res) {
-						        console.log('success:' + JSON.stringify(res));
+						      console.log('success:' + JSON.stringify(res));
 						    },
 						    fail: function (err) {
-						        console.log('fail:' + JSON.stringify(err));
+									console.log('fail:' + JSON.stringify(err));
 						    }
 						});
 					}
