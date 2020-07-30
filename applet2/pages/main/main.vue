@@ -28,8 +28,8 @@
 			<view class="search-btn">查 询</view>
 		</view>
 		<!-- 支付popup -->
-		<view class="pay-model-shade"></view>
-		<view class="pay-model-box">
+		<view class="pay-model-shade" v-show="payModel"></view>
+		<view class="pay-model-box" v-show="payModel">
 			<view class="title">订单信息</view>
 			<view class="info-box">
 				<view class="label">VIN码</view>
@@ -37,13 +37,19 @@
 			</view>
 			<view class="info-box">
 				<view class="label">品牌</view>
-				<view class="value">{{brandName}}</view>
+				<view class="value" v-show="!isBrandName">{{brandName}}</view>
+				<view v-show="isBrandName" style="flex: 1; text-align: right;">
+					<picker :value="index" :range="brandList" @change="selectBrand">
+						<view class="value">{{brandName}}</view>
+					</picker>
+				</view>
 			</view>
 			<view class="info-box">
 				<view class="label">待支付</view>
-				<view class="value">￥ {{money}} 元</view>
+				<view class="value"><text style="color: red;">￥{{money}}</text> 元</view>
 			</view>
-			<view class="create-btn">生成报告</view>
+			<view class="create-btn" @tap="isPay">生成报告</view>
+			<view class="close-btn" @tap="payModel=false">取消查询</view>
 		</view>
 	</view>
 </template>
@@ -63,6 +69,10 @@
 		},
 		data() {
 			return {
+				isBrandName: false,
+				brandList: [],
+				money: '',
+				brandName: '',
 				payModel: false,
 				swIndex: 0,
 				swiperList: [{
@@ -75,8 +85,8 @@
 					}
 				],
 				swiperType: true,
-
-				vinVal: 'LFMKV30F6B0085121'
+				vinVal: 'LFMKV30F6B0085121',
+				brandId: ''
 			}
 		},
 		onShow() {
@@ -84,6 +94,29 @@
 		},
 		methods: {
 			...mapMutations(['logout']),
+			isPay(){
+				const that = this
+				if(that.isBrandName){
+					// 不需要补全
+					that.pay()
+				}else{
+					// 需要补全
+					if(that.brandId){
+						that.$quest({
+							url: '/api/qscc/v1/site/add-vin-to-brand',
+							data: {
+								auto_brand_id: that.brandId,
+								vin: that.vinVal
+							},
+							success: (res)=>{
+								that.pay()
+							}
+						})
+					}else{
+						that.$showModel('请选择您的爱车品牌')
+					}
+				}
+			},
 			pay() {
 				const that = this
 				that.$quest({
@@ -168,7 +201,6 @@
 										},
 										success: (res) => {
 											if (res.code === 200) {
-												console.log(res.data);
 												that.vinVal = res.data[0]
 											} else {
 												that.$showModel(res.data.message)
@@ -183,6 +215,10 @@
 					}
 				});
 			},
+			selectBrand(val){
+				this.brandId = val.detail.value
+				this.brandName = this.brandList[this.brandId]
+			},
 			search() {
 				const that = this
 				if (!that.vinVal) {
@@ -193,24 +229,27 @@
 					url: '/api/qscc/v1/report/check-brand',
 					method: 'GET',
 					data: {
-						vin: 'LFMKV30F6B0085121' || that.vinVal,
+						vin: that.vinVal,
 					},
-					noErrorTip: true,
 					success: (res) => {
-						that.payModel = true
+						for (let i in res.data.auto_brands){
+							that.brandList.push(res.data.auto_brands[i])
+						}
 						if(res.data.auto_brand_name){
 							// 已查询到车品牌，调起支付
+							that.isBrandName = true
+							that.brandName = res.data.auto_brand_name
+							that.money = res.data.total_price
 						}else{
 							//  未查询到车品牌，下拉让用户选择品牌
-							
+							that.brandList = []
+							for (let i in res.data.auto_brands){
+								that.brandList.push(res.data.auto_brands[i])
+							}
+							that.isBrandName = false
+		
 						}
-					},
-					fail: (res)=>{
-						if(res.code === 422){
-							// 暂不支持，需要补全
-						}else{
-							that.$showModel(res.message)
-						}
+						that.payModel = true
 					}
 				})
 			}
@@ -307,20 +346,51 @@
 		opacity: .7;
 		z-index: 3;
 	}
-	pay-model-box{
+	.pay-model-box{
+		box-sizing: border-box;
 		position: fixed;
-		width: 300upx;
+		left: calc(50vw - 300upx);
+		top: calc(50vh - 250upx);
+		width: 600upx;
 		height: 500upx;
+		z-index: 6;
+		border: 1px solid #eee;
+		border-radius: 6upx;
+		background-color: #fff;
+		padding: 40upx 30upx 0 30upx;
 		.title{
 			text-align: center;
 			font-size: 30upx;
 			font-weight: bold;
+			margin-bottom: 40upx;
 		}
 		.info-box{
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
+			margin-bottom: 16upx;
+			font-size: 28upx;
+			.label{
+				color: #666;
+			}
+		}
+		.create-btn{
 			padding: 16upx 24upx;
+			background-color: rgb(15,174,255);
+			text-align: center;
+			color: #fff;
+			padding: 16upx 24upx;
+			border-radius: 6upx;
+			margin-top:  60upx;
+		}
+		.close-btn{
+			padding: 16upx 24upx;
+			text-align: center;
+			border: 1px solid #ccc;
+			color: #333;
+			padding: 16upx 24upx;
+			border-radius: 6upx;
+			margin-top:  20upx;
 		}
 	}
 	
