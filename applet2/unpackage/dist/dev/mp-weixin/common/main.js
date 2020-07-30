@@ -57,13 +57,15 @@ _vue.default.prototype.$quest = function (obj) {
             obj.success(res.data);
           }
         } else {
-          uni.showModal({
-            title: '提示',
-            content: res.data.message,
-            showCancel: false });
+          if (!obj.noErrorTip) {
+            uni.showModal({
+              title: '提示',
+              content: res.data.message,
+              showCancel: false });
 
+          }
           if (obj.fail) {
-            obj.fail();
+            obj.fail(res);
           }
         }
       },

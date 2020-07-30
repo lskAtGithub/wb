@@ -71,4 +71,36 @@
   color: #fff;
   padding: 20rpx 0;
 }
+.pay-model-shade.data-v-52f690a6 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: #000;
+  opacity: .7;
+  z-index: 3;
+}
+pay-model-box.data-v-52f690a6 {
+  position: fixed;
+  width: 300rpx;
+  height: 500rpx;
+}
+pay-model-box .title.data-v-52f690a6 {
+  text-align: center;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+pay-model-box .info-box.data-v-52f690a6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  padding: 16rpx 24rpx;
+}
 

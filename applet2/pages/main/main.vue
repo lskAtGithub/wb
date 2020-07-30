@@ -2,8 +2,8 @@
 	<view class="page">
 		<!-- 轮播 -->
 		<view class="carousel-section">
-			<bw-swiper :swiperList="swiperList" :swiperType="swiperType" :indicatorDots="false" @change="changItem"
-			 :textTip="true" indicatorColor="#DDDDDD" indicatorActiveColor="#666666"></bw-swiper>
+			<bw-swiper :swiperList="swiperList" :swiperType="swiperType" :indicatorDots="false" @change="changItem" :textTip="true"
+			 indicatorColor="#DDDDDD" indicatorActiveColor="#666666"></bw-swiper>
 			<view class="sw-wrap">
 				<text v-for="(item,index) in swiperList" :key="index" class="sw-item" :class="{'active': swIndex == index}"></text>
 			</view>
@@ -16,37 +16,56 @@
 				<image src="../../static/img/xiangji.png" class="icon"></image>
 			</view>
 		</view>
-		<view class="content">
+<!-- 		<view class="content">
 			<view class="input-in">
 				<input type="text" class="input" maxlength="17" placeholder="查询车辆">
 			</view>
 			<view class="icons l-none">
 				<image src="../../static/img/right.png" class="icon"></image>
 			</view>
-		</view>
+		</view> -->
 		<view class="search-box" @tap="search">
 			<view class="search-btn">查 询</view>
 		</view>
-		<view class="search-box" @tap="pay">
-			<view class="search-btn">支 付</view>
+		<!-- 支付popup -->
+		<view class="pay-model-shade"></view>
+		<view class="pay-model-box">
+			<view class="title">订单信息</view>
+			<view class="info-box">
+				<view class="label">VIN码</view>
+				<view class="value">{{vinVal}}</view>
+			</view>
+			<view class="info-box">
+				<view class="label">品牌</view>
+				<view class="value">{{brandName}}</view>
+			</view>
+			<view class="info-box">
+				<view class="label">待支付</view>
+				<view class="value">￥ {{money}} 元</view>
+			</view>
+			<view class="create-btn">生成报告</view>
 		</view>
 	</view>
 </template>
 
 <script>
-	import { mapState, mapMutations } from 'vuex'
+	import {
+		mapState,
+		mapMutations
+	} from 'vuex'
 	import bwSwiper from '@/wxcomponents/bw-swiper/bw-swiper.vue'
 
 	export default {
-		computed: { ...mapState(['url', 'token']) },
-		components:{
+		computed: { ...mapState(['url', 'token'])
+		},
+		components: {
 			bwSwiper
 		},
-		data(){
+		data() {
 			return {
-				swIndex:0,
-				swiperList: [
-					{
+				payModel: false,
+				swIndex: 0,
+				swiperList: [{
 						type: 'image',
 						img: 'https://tse2-mm.cn.bing.net/th/id/OIP.3Ve6WFCk6Fp-kSzB-2W7LAHaEc?w=311&h=187&c=7&o=5&dpr=1.2&pid=1.7'
 					},
@@ -65,28 +84,28 @@
 		},
 		methods: {
 			...mapMutations(['logout']),
-			pay(){
+			pay() {
 				const that = this
 				that.$quest({
 					url: '/api/qscc/v1/order/mp-pay',
 					data: {
 						vin: that.vinVal
 					},
-					success:(res)=>{
+					success: (res) => {
 						uni.requestPayment({
-								appId: res.data.appId,
-						    provider: 'wxpay',
-						    timeStamp: res.data.timeStamp,
-						    nonceStr: res.data.nonceStr,
-						    package: res.data.package,
-						    signType: 'MD5',
-						    paySign: res.data.paySign,
-						    success: function (res) {
-						      console.log('success:' + JSON.stringify(res));
-						    },
-						    fail: function (err) {
-									console.log('fail:' + JSON.stringify(err));
-						    }
+							appId: res.data.appId,
+							provider: 'wxpay',
+							timeStamp: res.data.timeStamp,
+							nonceStr: res.data.nonceStr,
+							package: res.data.package,
+							signType: 'MD5',
+							paySign: res.data.paySign,
+							success: function(res) {
+								console.log('success:' + JSON.stringify(res));
+							},
+							fail: function(err) {
+								console.log('fail:' + JSON.stringify(err));
+							}
 						});
 					}
 				})
@@ -94,16 +113,16 @@
 			changItem(e) {
 				this.swIndex = e.detail.current
 			},
-			getBanner(){
+			getBanner() {
 				const that = this
 				this.$quest({
 					url: '/api/qscc/v1/banner/list',
 					noToken: true,
 					method: 'POST',
-					success:(res)=>{
-						this.swiperList = [] 
-						if(res.data){
-							res.data.forEach(item=>{
+					success: (res) => {
+						this.swiperList = []
+						if (res.data) {
+							res.data.forEach(item => {
 								this.swiperList.push({
 									type: 'image',
 									img: item.img
@@ -121,19 +140,19 @@
 							url: that.url + '/api/v1/file/images?access-token=' + that.token,
 							filePath: chooseImageRes.tempFilePaths[0],
 							name: 'file',
-							fileType: 'image', 
+							fileType: 'image',
 							header: {
 								'access-token': that.token,
 								'content-type': 'multipart/form-data'
 							},
 							success: (uploadFileRes) => {
 								var result = JSON.parse(uploadFileRes.data)
-								if(result.code === 401){
+								if (result.code === 401) {
 									that.logout()
 									uni.showModal({
 										title: '提示',
 										content: res.data.message,
-										showCancel:false,
+										showCancel: false,
 										complete() {
 											uni.switchTab({
 												url: '/pages/user/user'
@@ -141,22 +160,22 @@
 										}
 									})
 								}
-								if(result.code === 200){
+								if (result.code === 200) {
 									that.$quest({
 										url: '/api/qscc/v1/site/get-vin-code',
-										data:{
+										data: {
 											file_url: result.data.url,
 										},
-										success: (res)=>{
-											if(res.code === 200){
+										success: (res) => {
+											if (res.code === 200) {
 												console.log(res.data);
 												that.vinVal = res.data[0]
-											}else{
+											} else {
 												that.$showModel(res.data.message)
 											}
 										}
 									})
-								}else{
+								} else {
 									that.$showModel(result.message)
 								}
 							}
@@ -164,9 +183,9 @@
 					}
 				});
 			},
-			search(){
+			search() {
 				const that = this
-				if(!that.vinVal){
+				if (!that.vinVal) {
 					that.$showModel('请输入vin码')
 					return
 				}
@@ -174,10 +193,24 @@
 					url: '/api/qscc/v1/report/check-brand',
 					method: 'GET',
 					data: {
-						vin: 'LFMKV30F6B0085122' || that.vinVal,
+						vin: 'LFMKV30F6B0085121' || that.vinVal,
 					},
-					success: (res)=>{
-						console.log(res);
+					noErrorTip: true,
+					success: (res) => {
+						that.payModel = true
+						if(res.data.auto_brand_name){
+							// 已查询到车品牌，调起支付
+						}else{
+							//  未查询到车品牌，下拉让用户选择品牌
+							
+						}
+					},
+					fail: (res)=>{
+						if(res.code === 422){
+							// 暂不支持，需要补全
+						}else{
+							that.$showModel(res.message)
+						}
 					}
 				})
 			}
@@ -186,73 +219,109 @@
 </script>
 
 <style lang="scss" scoped>
-	.page{
-			height: 100vh;
-			background-color: #fff;
+	.page {
+		height: 100vh;
+		background-color: #fff;
+	}
+
+	.carousel-section {
+		text-align: center;
+		background: #FFFFFF;
+		padding: 30upx 0;
+
+		.sw-item {
+			display: inline-block;
+			width: 16upx;
+			height: 16upx;
+			margin-right: 20upx;
+			background: #DDDDDD;
+			border-radius: 16upx;
 		}
-		.carousel-section {
+
+		.sw-item.active {
+			background: #666666;
+		}
+	}
+
+	.content {
+		display: flex;
+		margin: 20upx 40upx;
+		font-size: 28upx;
+		height: 72upx;
+		line-height: 70upx;
+	}
+
+	.content .input-in {
+		border: 1px solid #a5aab3;
+		align-items: center;
+		padding: 0 24upx;
+		font-size: 28upx;
+		border-top-left-radius: 6upx;
+		border-bottom-left-radius: 6upx;
+		border-right: 0;
+		flex: 1;
+	}
+
+	.content .input-in .input {
+		height: 70upx;
+		line-height: 70upx;
+		font-size: 26upx;
+		color: #333;
+	}
+
+	.content .icons {
+		border: 1px solid #a5aab3;
+		padding: 10upx 10upx 0 10upx;
+		border-top-right-radius: 6upx;
+		border-bottom-right-radius: 6upx;
+	}
+
+	.content .icons .icon {
+		width: 50upx;
+		height: 50upx;
+	}
+
+	.content .icons.l-none {
+		border-left: 0;
+	}
+
+	.search-box {
+		padding: 40upx;
+	}
+
+	.search-box .search-btn {
+		background: #ff1a1a;
+		border-radius: 10upx;
+		border: 1px solid #fff;
+		text-align: center;
+		color: #fff;
+		padding: 20upx 0;
+	}
+	.pay-model-shade{
+		position: fixed;
+		top: 0;
+		left: 0;
+		height: 100vh;
+		width: 100vw;
+		background-color: #000;
+		opacity: .7;
+		z-index: 3;
+	}
+	pay-model-box{
+		position: fixed;
+		width: 300upx;
+		height: 500upx;
+		.title{
 			text-align: center;
-			background: #FFFFFF;
-			padding: 30upx 0;
-
-			.sw-item {
-				display: inline-block;
-				width: 16upx;
-				height: 16upx;
-				margin-right: 20upx;
-				background: #DDDDDD;
-				border-radius: 16upx;
-			}
-
-			.sw-item.active {
-				background: #666666;
-			}
+			font-size: 30upx;
+			font-weight: bold;
 		}
-		.content{
+		.info-box{
 			display: flex;
-			margin: 20upx 40upx;
-			font-size: 28upx;
-			height: 72upx;
-			line-height: 70upx;
-		}
-		.content .input-in{
-			border: 1px solid #a5aab3;
 			align-items: center;
-			padding: 0 24upx;
-			font-size: 28upx;
-			border-top-left-radius: 6upx;
-			border-bottom-left-radius: 6upx;
-			border-right: 0;
-			flex: 1;
+			justify-content: space-between;
+			padding: 16upx 24upx;
 		}
-		.content .input-in .input{
-			height: 70upx;
-			line-height: 70upx;
-			font-size: 26upx;
-			color: #333;
-		}
-		.content .icons{
-			border: 1px solid #a5aab3;
-			padding: 10upx 10upx 0 10upx;
-			border-top-right-radius: 6upx;
-			border-bottom-right-radius: 6upx;
-		}
-		.content .icons .icon{
-			width: 50upx;
-			height: 50upx;
-		}
-		.content .icons.l-none{
-			border-left: 0;
-		}
-		.search-box{
-			padding: 40upx;
-		}
-		.search-box .search-btn{
-			background: #ff1a1a;
-			border-radius: 10upx;
-			border: 1px solid #fff;
-			text-align: center;
-			color: #fff;
-			padding: 20upx 0;
-		}
+	}
+	
 </style>
