@@ -27,6 +27,10 @@
 		<view class="search-box" @tap="search">
 			<view class="search-btn">查 询</view>
 		</view>
+		
+		<view class="search-box" @tap="getReport">
+			<view class="search-btn">查 询 2</view>
+		</view>
 		<!-- 支付popup -->
 		<view class="pay-model-shade" v-show="payModel"></view>
 		<view class="pay-model-box" v-show="payModel">
@@ -85,7 +89,8 @@
 					}
 				],
 				swiperType: true,
-				vinVal: 'LFMKV30F6B0085121',
+				// vinVal: 'LFMKV30F6B0085121',
+				vinVal: 'LSVX065N5G2158772',
 				brandId: ''
 			}
 		},
@@ -94,6 +99,18 @@
 		},
 		methods: {
 			...mapMutations(['logout']),
+			getReport(){
+				const that = this
+				that.$quest({
+					url: '/api/qscc/v1/report/buy-report',
+					data: {
+						vin: that.vinVal
+					},
+					success: (res)=>{
+						console.log(res);
+					}
+				})
+			},
 			isPay(){
 				const that = this
 				if(that.isBrandName){
