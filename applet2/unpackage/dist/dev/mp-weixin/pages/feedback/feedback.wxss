@@ -3,10 +3,11 @@
   margin: 0 10vw;
 }
 .page .lists .list.data-v-91bba7b4 {
-  background-color: #f7f7ff;
-  margin-top: 20rpx;
+  background-color: #fff;
+  box-shadow: 0 0 5rpx 0 #000;
+  margin-top: 40rpx;
   border-radius: 10rpx;
-  padding: 20rpx;
+  padding: 30rpx;
 }
 .page .lists .list .title.data-v-91bba7b4 {
   font-size: 30rpx;
@@ -15,7 +16,7 @@
   overflow: hidden;
   white-space: nowrap;
   text-align: center;
-  margin-bottom: 10rpx;
+  margin-bottom: 30rpx;
 }
 .page .lists .list .content.data-v-91bba7b4 {
   font-size: 26rpx;
@@ -92,5 +93,17 @@
           flex: 1;
   text-align: center;
   padding: 20rpx 0;
+}
+.page .empty.data-v-91bba7b4 {
+  text-align: center;
+  color: #333;
+  font-size: 28rpx;
+  margin-top: 200rpx;
+  font-weight: bold;
+}
+.page .empty .empty-icon.data-v-91bba7b4 {
+  width: 100rpx;
+  height: 100rpx;
+  margin-bottom: 28rpx;
 }
 

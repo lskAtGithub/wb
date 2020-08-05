@@ -19,7 +19,7 @@ Vue.prototype.$showModel = function(content="",complete){
 	})
 }
 Vue.prototype.$quest = function (obj){
-	if(store.state.token){
+	if(obj.noToken || store.state.token){
 		uni.showLoading()
 		uni.request({
 			url: !obj.noToken ? store.state.url + obj.url + '?access-token=' + store.state.token : store.state.url + obj.url,
@@ -48,7 +48,7 @@ Vue.prototype.$quest = function (obj){
 						obj.success(res.data)
 					}
 				}else{
-					if(!obj.noErrorTip){
+					if(!obj.noErrorTip && res.data.code !== 401){
 						uni.showModal({
 							title: '提示',
 							content:res.data.message,
@@ -73,12 +73,7 @@ Vue.prototype.$quest = function (obj){
 		uni.showModal({
 			title: '提示',
 			content:'请先登录',
-			showCancel:false,
-			complete() {
-				uni.switchTab({
-					url: '/pages/user/user'
-				})
-			}
+			showCancel:false
 		})
 	}
 }

@@ -22,7 +22,7 @@
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
-  margin: 20rpx 40rpx;
+  margin: 10rpx 40rpx;
   font-size: 28rpx;
   height: 72rpx;
   line-height: 70rpx;
@@ -60,11 +60,16 @@
 .content .icons.l-none.data-v-52f690a6 {
   border-left: 0;
 }
+.tips-box.data-v-52f690a6 {
+  padding: 20rpx 40rpx;
+  font-size: 24rpx;
+  color: #666;
+}
 .search-box.data-v-52f690a6 {
-  padding: 40rpx;
+  padding: 30rpx 40rpx;
 }
 .search-box .search-btn.data-v-52f690a6 {
-  background: #ff1a1a;
+  background: #4a68e9;
   border-radius: 10rpx;
   border: 1px solid #fff;
   text-align: center;
@@ -133,5 +138,86 @@
   padding: 16rpx 24rpx;
   border-radius: 6rpx;
   margin-top: 20rpx;
+}
+.pay-model-box.report-box.data-v-52f690a6 {
+  height: 420rpx;
+}
+.pay-model-box.report-box .report-label.data-v-52f690a6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  margin-bottom: 20rpx;
+}
+.pay-model-box.report-box .report-label .load.data-v-52f690a6 {
+  -webkit-animation: load-data-v-52f690a6 2s linear infinite;
+          animation: load-data-v-52f690a6 2s linear infinite;
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 10rpx;
+}
+.pay-model-box.report-box .report-label .t.data-v-52f690a6 {
+  font-size: 26rpx;
+  font-weight: bold;
+}
+.pay-model-box.report-box .tips-content.data-v-52f690a6 {
+  font-size: 24rpx;
+  color: #666;
+}
+.pay-model-box.report-box .isGetReport.data-v-52f690a6 {
+  background-color: #ccc;
+}
+@-webkit-keyframes load-data-v-52f690a6 {
+0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+}
+100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+}
+}
+@keyframes load-data-v-52f690a6 {
+0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+}
+100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+}
+}
+@-webkit-keyframes jump-data-v-52f690a6 {
+0% {
+    -webkit-transform: translateY(0rpx);
+            transform: translateY(0rpx);
+}
+50% {
+    -webkit-transform: translateY(-10rpx);
+            transform: translateY(-10rpx);
+}
+100% {
+    -webkit-transform: translateY(0rpx);
+            transform: translateY(0rpx);
+}
+}
+@keyframes jump-data-v-52f690a6 {
+0% {
+    -webkit-transform: translateY(0rpx);
+            transform: translateY(0rpx);
+}
+50% {
+    -webkit-transform: translateY(-10rpx);
+            transform: translateY(-10rpx);
+}
+100% {
+    -webkit-transform: translateY(0rpx);
+            transform: translateY(0rpx);
+}
 }
 

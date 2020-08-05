@@ -7,9 +7,9 @@
 			</view>
 			<view  class="info" v-if="hasLogin">
 				<view class="name">{{ userInfo.nickName }}</view>
-				<view>{{userInfo.gender}}</view>
+				<!-- <view>{{userInfo.gender}}</view> -->
 			</view>
-			<button open-type="getUserInfo" @getuserinfo="getUserInfo" class="info get-info-btn" v-else>
+			<button size="mini" open-type="getUserInfo" @getuserinfo="getUserInfo" class="info get-info-btn" v-else>
 				登录
 			</button>
 		</view>
@@ -20,7 +20,12 @@
 				<view class="list-title">分享给好友</view>
 				<image src="../../static/img/right.png" class="icon"></image>
 			</view>
-			<view class="list" @tap="toLink">
+			<view class="list" @tap="toLink('../report/pageReport')">
+				<image src="../../static/img/baogao.png" class="icon"></image>
+				<view class="list-title">我的报告</view>
+				<image src="../../static/img/right.png" class="icon"></image>
+			</view>
+			<view class="list" @tap="toLink('../feedback/feedback')">
 				<image src="../../static/img/fankui.png" class="icon"></image>
 				<view class="list-title">意见反馈</view>
 				<image src="../../static/img/right.png" class="icon"></image>
@@ -52,15 +57,16 @@
 		},
 		methods: {
 			...mapMutations(['login','saveToken','saveInfo']),
-			toLink(){
+			toLink(url){
 				uni.navigateTo({
-					url: '../feedback/feedback'
+					url: url
 				})
 			},
 			getPhone(){
 				const that = this
 				that.$quest({
 					url: '/api/qscc/v1/member/contact',
+					noToken: true,
 					success:(res)=>{
 						if(res.data.tel){
 							that.phone = res.data.tel
@@ -130,33 +136,32 @@
 .info-box{
 	display: flex;
 	align-items: center;
-	justify-content: flex-start;
-	margin: 50upx 30upx;
+	flex-direction: column;
+	padding: 140upx 30upx 50upx 30upx;
+	background-image: linear-gradient(#4a68e9, #6793ea);
 }
 .info-box .avatar-box{
-	margin-right: 40upx;
+	margin-bottom: 40upx;
 }
 .info-box .avatar-box .avatar{
-	width: 80upx;
-	height: 80upx;
+	width: 120upx;
+	height: 120upx;
 	border: 2px solid #f2f2f2;
 	border-radius: 80upx;
 	box-shadow: 0 0 5upx;
-}
-.info-box .info{
-	font-size: 26upx;
 }
 .info-box .info.get-info-btn{
 	margin: 0;
 }
 .info-box .info .name{
-	font-size: 36upx;
+	font-size: 30upx;
 	font-weight: bold;
+	color: #f8f8f8;
 }
 .lists{
 	box-shadow: 0 0 4px #a3a3a3;
 	border-radius: 8upx;
-	margin: 0 30upx;
+	margin: 30upx;
 }
 .lists .list{
 	display: flex;

@@ -16,8 +16,7 @@
 	}
 </script>
 
-<style lang="scss">
-
+<style>
 	/* reset */
 	*{
 		padding: 0;

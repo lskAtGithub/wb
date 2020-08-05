@@ -1,22 +1,29 @@
 <template>
 	<view class="page">
-		<view class="lists">
-			<view class="list" v-for="(item,index) in list" :key="index">
-				<view class="title">{{item.title}}</view>
-				<view class="content">{{item.content}}</view>
+		<view v-if="!isEmpty">
+			<view class="lists">
+				<view class="list" v-for="(item,index) in list" :key="index">
+					<view class="title">{{item.title}}</view>
+					<view class="content">{{item.content}}</view>
+				</view>
+			</view>
+			<view class="add-btn" @tap="feedModel = true">
+				<image src="../../static/img/add.png" class="add" mode=""></image>
+			</view>
+			<view class="feed-model" v-show="feedModel"></view>
+			<view class="feedback-wrap" v-show="feedModel">
+				<input type="text" v-model="title" class="feed-title" placeholder="请输入标题">
+				<textarea v-model="content" class="feed-content" placeholder="请输入内容" />
+				<view class="feed-submit">
+					<text @tap="submit">提 交</text>
+					<text @tap="feedModel = false">取 消</text>
+				</view>
 			</view>
 		</view>
-		<view class="add-btn" @tap="feedModel = true">
-			<image src="../../static/img/add.png" class="add" mode=""></image>
-		</view>
-		<view class="feed-model" v-show="feedModel"></view>
-		<view class="feedback-wrap" v-show="feedModel">
-			<input type="text" v-model="title" class="feed-title" placeholder="请输入标题">
-			<textarea v-model="content" class="feed-content" placeholder="请输入内容" />
-			<view class="feed-submit">
-				<text @tap="submit">提 交</text>
-				<text @tap="feedModel = false">取 消</text>
-			</view>
+		<!-- 暂无意见反馈 -->
+		<view class="empty" v-else>
+			<view><image class="empty-icon" src="../../static/img/null.png" mode=""></image></view>
+			<view>暂无反馈信息</view>
 		</view>
 	</view>
 </template>
@@ -32,7 +39,8 @@
 				],
 				title: '',
 				content: '',
-				feedModel: false
+				feedModel: false,
+				isEmpty: true
 			}
 		},
 		methods:{
@@ -41,6 +49,11 @@
 				that.$quest({
 					url: '/api/qscc/v1/client-message/index',
 					success: (res)=>{
+						if(res.data && res.data.length){
+							that.isEmpty = false
+						}else{
+							that.isEmpty = true
+						}
 						that.list = res.data
 					}					
 				})
@@ -80,10 +93,11 @@
 			width: 80vw;
 			margin: 0 10vw;
 			.list{
-				background-color: rgb(247,247,255);
-				margin-top: 20upx;
+				background-color: #fff;
+				box-shadow: 0 0 5upx 0 #000;
+				margin-top: 40upx;
 				border-radius: 10upx;
-				padding: 20upx;
+				padding: 30upx;
 				.title{
 					font-size: 30upx;
 					font-weight: bold;
@@ -91,7 +105,7 @@
 					overflow: hidden;
 					white-space: nowrap;
 					text-align: center;
-					margin-bottom: 10upx;
+					margin-bottom: 30upx;
 				}
 				.content{
 					font-size: 26upx;
@@ -162,6 +176,19 @@
 					text-align: center;
 					padding: 20upx 0;
 				}
+			}
+		}
+		.empty{
+			text-align: center;
+			color: #333;
+			font-size: 28upx;
+			margin-top: 200upx;
+			font-weight: bold;
+			
+			.empty-icon{
+				width: 100upx;
+				height: 100upx;
+				margin-bottom: 28upx;
 			}
 		}
 	}

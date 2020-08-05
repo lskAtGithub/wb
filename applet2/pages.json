@@ -1,9 +1,28 @@
 {
 	"pages": [
 		{
+			"path": "pages/HFive/HFive",
+			"style": {
+				"navigationBarTitleText": "报告详情"
+			}
+		},
+		{
 			"path": "pages/main/main",
 			"style": {
 				"navigationBarTitleText": "查询"
+			}
+		},
+		{
+			"path": "pages/buyCar/buyCar",
+			"style": {
+				"navigationBarTitleText": "看车"
+			}
+		},
+		{
+			"path": "pages/user/user",
+			"style": {
+				"navigationBarTitleText": "个人中心",
+				"navigationStyle": "custom"
 			}
 		},
 		{
@@ -13,9 +32,15 @@
 			}
 		},
 		{
-			"path": "pages/user/user",
+			"path": "pages/report/report",
 			"style": {
-				"navigationBarTitleText": "我的"
+				"navigationBarTitleText": "报告"
+			}
+		},
+		{
+			"path": "pages/report/pageReport",
+			"style": {
+				"navigationBarTitleText": "报告"
 			}
 		},
 		{
@@ -35,12 +60,6 @@
 			"style": {
 				"navigationBarTitleText": "找回密码"
 			}
-		}, 
-		{
-			"path": "pages/report/report",
-			"style": {
-				"navigationBarTitleText": "报告"
-			}
 		}
 	],
 	"tabBar": {
@@ -53,6 +72,12 @@
 				"text": "查询",
 				"iconPath": "static/img/search.png",
 				"selectedIconPath": "static/img/search(1).png"
+			},
+			{
+				"pagePath": "pages/buyCar/buyCar",
+				"text": "看车",
+				"iconPath": "static/img/buyCar.png",
+				"selectedIconPath": "static/img/buyCar1.png"
 			},
 			{
 				"pagePath": "pages/report/report",
@@ -70,7 +95,7 @@
 	},
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
-		"navigationBarBackgroundColor": "#0faeff",
-		"backgroundColor": "#fbf9fe"
+		"navigationBarBackgroundColor": "#4a68e9",
+		"backgroundColor": "#f0f0f0"
 	}
 }

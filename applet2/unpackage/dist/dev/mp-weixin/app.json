@@ -1,18 +1,21 @@
 {
   "pages": [
+    "pages/HFive/HFive",
     "pages/main/main",
-    "pages/feedback/feedback",
+    "pages/buyCar/buyCar",
     "pages/user/user",
+    "pages/feedback/feedback",
+    "pages/report/report",
+    "pages/report/pageReport",
     "pages/login/login",
     "pages/reg/reg",
-    "pages/pwd/pwd",
-    "pages/report/report"
+    "pages/pwd/pwd"
   ],
   "subPackages": [],
   "window": {
     "navigationBarTextStyle": "white",
-    "navigationBarBackgroundColor": "#0faeff",
-    "backgroundColor": "#fbf9fe"
+    "navigationBarBackgroundColor": "#4a68e9",
+    "backgroundColor": "#f0f0f0"
   },
   "tabBar": {
     "color": "#7a7e83",
@@ -24,6 +27,12 @@
         "text": "查询",
         "iconPath": "static/img/search.png",
         "selectedIconPath": "static/img/search(1).png"
+      },
+      {
+        "pagePath": "pages/buyCar/buyCar",
+        "text": "看车",
+        "iconPath": "static/img/buyCar.png",
+        "selectedIconPath": "static/img/buyCar1.png"
       },
       {
         "pagePath": "pages/report/report",
@@ -39,6 +48,5 @@
       }
     ]
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap15.json"
+  "usingComponents": {}
 }

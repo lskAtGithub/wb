@@ -104,11 +104,11 @@
 /******/
 /******/
 /******/ 		// mini-css-extract-plugin CSS loading
-/******/ 		var cssChunks = {"wxcomponents/bw-swiper/bw-swiper":1,"components/m-input":1,"components/m-icon/m-icon":1};
+/******/ 		var cssChunks = {"components/tki-float-keyboard/tki-float-keyboard":1,"wxcomponents/bw-swiper/bw-swiper":1,"components/m-input":1,"components/m-icon/m-icon":1};
 /******/ 		if(installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]);
 /******/ 		else if(installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) {
 /******/ 			promises.push(installedCssChunks[chunkId] = new Promise(function(resolve, reject) {
-/******/ 				var href = "" + ({"wxcomponents/bw-swiper/bw-swiper":"wxcomponents/bw-swiper/bw-swiper","components/m-input":"components/m-input","components/m-icon/m-icon":"components/m-icon/m-icon"}[chunkId]||chunkId) + ".wxss";
+/******/ 				var href = "" + ({"components/tki-float-keyboard/tki-float-keyboard":"components/tki-float-keyboard/tki-float-keyboard","wxcomponents/bw-swiper/bw-swiper":"wxcomponents/bw-swiper/bw-swiper","components/m-input":"components/m-input","components/m-icon/m-icon":"components/m-icon/m-icon"}[chunkId]||chunkId) + ".wxss";
 /******/ 				var fullhref = __webpack_require__.p + href;
 /******/ 				var existingLinkTags = document.getElementsByTagName("link");
 /******/ 				for(var i = 0; i < existingLinkTags.length; i++) {

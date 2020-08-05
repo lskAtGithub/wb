@@ -101,7 +101,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
-var components
+var components = {
+  tkiFloatKeyboard: function() {
+    return __webpack_require__.e(/*! import() | components/tki-float-keyboard/tki-float-keyboard */ "components/tki-float-keyboard/tki-float-keyboard").then(__webpack_require__.bind(null, /*! @/components/tki-float-keyboard/tki-float-keyboard.vue */ 88))
+  }
+}
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -109,6 +113,10 @@ var render = function() {
   if (!_vm._isMounted) {
     _vm.e0 = function($event) {
       _vm.payModel = false
+    }
+
+    _vm.e1 = function($event) {
+      _vm.reportModel = false
     }
   }
 }
@@ -199,7 +207,31 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _vuex = __webpack_require__(/*! vuex */ 8);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var bwSwiper = function bwSwiper() {__webpack_require__.e(/*! require.ensure | wxcomponents/bw-swiper/bw-swiper */ "wxcomponents/bw-swiper/bw-swiper").then((function () {return resolve(__webpack_require__(/*! @/wxcomponents/bw-swiper/bw-swiper.vue */ 66));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _vuex = __webpack_require__(/*! vuex */ 8);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var bwSwiper = function bwSwiper() {__webpack_require__.e(/*! require.ensure | wxcomponents/bw-swiper/bw-swiper */ "wxcomponents/bw-swiper/bw-swiper").then((function () {return resolve(__webpack_require__(/*! @/wxcomponents/bw-swiper/bw-swiper.vue */ 95));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var tkiFloatKeyboard = function tkiFloatKeyboard() {__webpack_require__.e(/*! require.ensure | components/tki-float-keyboard/tki-float-keyboard */ "components/tki-float-keyboard/tki-float-keyboard").then((function () {return resolve(__webpack_require__(/*! @/components/tki-float-keyboard/tki-float-keyboard.vue */ 88));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
 
 
 
@@ -209,10 +241,12 @@ var _vuex = __webpack_require__(/*! vuex */ 8);function ownKeys(object, enumerab
   computed: _objectSpread({}, (0, _vuex.mapState)(['url', 'token'])),
 
   components: {
-    bwSwiper: bwSwiper },
+    bwSwiper: bwSwiper, tkiFloatKeyboard: tkiFloatKeyboard },
 
   data: function data() {
     return {
+      isGetReport: false,
+      reportModel: false,
       isBrandName: false,
       brandList: [],
       money: '',
@@ -230,14 +264,79 @@ var _vuex = __webpack_require__(/*! vuex */ 8);function ownKeys(object, enumerab
 
       swiperType: true,
       vinVal: 'LFMKV30F6B0085121',
-      brandId: '' };
+      brandId: '',
+      timer: null,
+      carKeyVal: '' };
 
   },
   onShow: function onShow() {
-    // this.getBanner()
+    this.getBanner();
   },
   methods: _objectSpread({},
   (0, _vuex.mapMutations)(['logout']), {
+    getHFiveUrl: function getHFiveUrl() {
+      var that = this;
+      that.$quest({
+        url: '/api/qscc/v1/report/share-report',
+        success: function success(res) {
+          uni.setStorageSync('wapUrl', res.data.wap_url);
+          that.toLink();
+        } });
+
+    },
+    carKey: function carKey() {
+      this.$refs.keyb._keyShow();
+    },
+    keyDel: function keyDel() {
+      this.carKeyVal = this.carKeyVal.substring(0, this.carKeyVal.length - 1);
+    },
+    keyVal: function keyVal(v) {
+      this.carKeyVal += v;
+    },
+    toLink: function toLink() {
+      var that = this;
+      uni.navigateTo({
+        url: '../HFive/HFive' });
+
+    },
+    // 获取报告状态
+    getReportStatus: function getReportStatus() {
+      var that = this;
+      that.$quest({
+        url: '/api/qscc/v1/report/get-report-status',
+        data: {
+          vin: that.vinVal,
+          report_order_id: '' },
+
+        noErrorTip: true,
+        success: function success(res) {
+          that.isGetReport = true;
+          clearInterval(that.timer);
+          that.getReport();
+        } });
+
+    },
+    // 获取报告
+    getReport: function getReport() {
+      var that = this;
+      // if(!that.isGetReport){
+      // 	return
+      // }
+      that.$quest({
+        url: '/api/qscc/v1/report/list',
+        data: {
+          page: 1,
+          vin: that.vinVal },
+
+        success: function success(res) {
+          console.log(res);
+          uni.setStorageSync('wapUrl', res.data);
+          uni.navigateTo({
+            url: '../HFive/HFive' });
+
+        } });
+
+    },
     isPay: function isPay() {
       var that = this;
       if (that.isBrandName) {
@@ -266,7 +365,8 @@ var _vuex = __webpack_require__(/*! vuex */ 8);function ownKeys(object, enumerab
       that.$quest({
         url: '/api/qscc/v1/order/mp-pay',
         data: {
-          vin: that.vinVal },
+          vin: that.vinVal,
+          licenseplate: that.carKeyVal },
 
         success: function success(res) {
           uni.requestPayment({
@@ -279,6 +379,9 @@ var _vuex = __webpack_require__(/*! vuex */ 8);function ownKeys(object, enumerab
             paySign: res.data.paySign,
             success: function success(res) {
               console.log('success:' + JSON.stringify(res));
+              that.timer = setInterval(function () {
+                that.getReportStatus();
+              }, 3000);
             },
             fail: function fail(err) {
               console.log('fail:' + JSON.stringify(err));
