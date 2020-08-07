@@ -4,7 +4,30 @@
 			<text class="topbar-item" v-for="(item,index) in topbarList" :key="index">{{item.title}}</text>
 		</view> -->
 		<view class="lists" v-if="!isEmpty">
-			<view class="list" v-for="(item,index) in reportList" :key="index"></view>
+			<view class="list" v-for="(item,index) in reportList" :key="index">
+				<view class="content">
+					<view class="content-item">
+						<view class="label">VIN</view>
+						<view class="value">12346545641</view>
+					</view>
+					<view class="content-item">
+						<view class="label">发动机号</view>
+						<view class="value">12346545641</view>
+					</view>
+					<view class="content-item">
+						<view class="label">车牌号</view>
+						<view class="value">12346545641</view>
+					</view>
+					<view class="content-item">
+						<view class="label">订单号</view>
+						<view class="value">12346545641</view>
+					</view>
+				</view>
+				<view class="status">
+					<image v-if="true" src="../../static/img/waitDown.png" class="report-icon" mode=""></image>
+					<image v-else src="../../static/img/report-icon.png" class="report-icon" mode=""></image>
+				</view>
+			</view>
 		</view>
 		<view class="empty" v-else>
 			<view><image class="empty-icon" src="../../static/img/null.png" mode=""></image></view>
@@ -16,12 +39,13 @@
 <script>
 	export default {
 		onShow() {
-			this.getList()
+			// this.reportList = []
+			// this.getList()
 		},
 		data(){
 			return{
 				page: 1,
-				isEmpty: true,
+				isEmpty: false,
 				reportList: [],
 				topbarList: [
 					{
@@ -35,6 +59,10 @@
 					}
 				]
 			}
+		},
+		onReachBottom() {
+			const that = this
+			this.getList()
 		},
 		methods: {
 			getList(){
@@ -51,7 +79,10 @@
 						}else{
 							that.isEmpty = true
 						}
-						that.reportList = res.data
+						res.data.forEach(item=>{
+							that.reportList.push(item)
+						})
+						that.page++
 					}
 				})
 			}
@@ -62,9 +93,7 @@
 <style scoped lang="scss" scoped>
 	.page{
 		box-sizing: border-box;
-		width: 100vw;
-		height: 100vh;
-		overflow-y: auto;
+		background-color: #FFFFFF;
 		
 		.topbar{
 			display: flex;
@@ -81,14 +110,44 @@
 			width: 80vw;
 			margin: 40upx 10vw;
 			.list{
-				background-color: rgb(247,247,255);
 				margin-bottom: 40upx;
-				border-radius: 10upx;
-				padding: 30upx 20upx;
+				padding: 20upx;
 				border-radius: 8upx;
 				background-color: #fff;
-				box-shadow: 0 0 5upx 0 #000;
+				box-shadow: 0 0 10upx 0 #ccc;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
 				
+				.content{
+					margin-bottom: 10upx;
+					flex: 1;
+					&:last-child{
+						margin-bottom: 0;
+					}
+					.content-item{
+						display: flex;
+						align-items: center;
+						justify-content: flex-start;
+						font-size: 26upx;
+						.label{
+							width: 150upx;
+							color: #666;
+						}
+						.value{
+							color: #bcbcbc;
+							padding: 10upx;
+							// border-bottom: 1px solid #666;
+						}
+					}
+				}
+				.status{
+					.report-icon{
+						width: 130upx;
+						height: 140upx;
+						margin-left: 20upx;
+					}
+				}
 			}
 		}
 		.empty{
