@@ -65,13 +65,10 @@
 		<view class="pay-model-shade" v-show="reportModel"></view>
 		<view class="pay-model-box report-box" v-show="reportModel">
 			<view class="report-label">
-				<image v-if="!isGetReport" src="../../static/img/loading.png" class="load" mode=""></image>
-				<text class="t1 t" v-if="!isGetReport">报告生成中</text>
-				<text class="t1 t" v-if="isGetReport">报告已生成</text>
+				<image src="../../static/img/loading.png" class="load" mode=""></image>
+				<text class="t1 t">报告生成中</text>
 			</view>
-			<view class="tips-content" v-if="!isGetReport">报告正在生成中, 请稍后...您也可以稍后去我的报告中查看</view>
-			<view class="tips-content" v-else>报告已生成, 点击查看, 您也可以稍后去我的报告中查看</view>
-			<view class="create-btn" :class="{'isGetReport': !isGetReport}" @tap="getReport">查看报告</view>
+			<view class="tips-content">购买成功，可在我的报告中查看</view>
 			<view class="close-btn" @tap="reportModel=false">关闭</view>
 		</view>
 	</view>
@@ -93,7 +90,6 @@
 		},
 		data() {
 			return {
-				isGetReport: false,
 				reportModel: false,
 				isBrandName: false,
 				brandList: [],
@@ -111,7 +107,7 @@
 					}
 				],
 				swiperType: true,
-				vinVal: 'LFMKV30F6B0085121',
+				vinVal: '',
 				brandId: '',
 				timer: null,
 				carKeyVal: ''
@@ -145,44 +141,6 @@
 				const that = this
 				uni.navigateTo({
 					url: '../HFive/HFive'
-				})
-			},
-			// 获取报告状态
-			getReportStatus(){
-				const that = this
-				that.$quest({
-					url: '/api/qscc/v1/report/get-report-status',
-					data: {
-						vin: that.vinVal,
-						report_order_id: '',
-					},
-					noErrorTip: true,
-					success: (res)=>{
-						that.isGetReport = true
-						clearInterval(that.timer)
-						that.getReport()
-					}
-				})
-			},
-			// 获取报告
-			getReport(){
-				const that = this
-				// if(!that.isGetReport){
-				// 	return
-				// }
-				that.$quest({
-					url: '/api/qscc/v1/report/list',
-					data:{
-						page: 1,
-						vin: that.vinVal
-					},
-					success: (res)=>{
-						console.log(res);
-						uni.setStorageSync('wapUrl', res.data)
-						uni.navigateTo({
-							url: '../HFive/HFive'
-						})
-					}
 				})
 			},
 			isPay(){
@@ -226,10 +184,7 @@
 							signType: 'MD5',
 							paySign: res.data.paySign,
 							success: function(res) {
-								console.log('success:' + JSON.stringify(res));
-								that.timer = setInterval(()=>{
-									that.getReportStatus()
-								},3000)
+								that.reportModel = true
 							},
 							fail: function(err) {
 								console.log('fail:' + JSON.stringify(err));
@@ -495,7 +450,8 @@
 	}
 	
 	.pay-model-box.report-box{
-		height: 420upx;
+		height: 320upx;
+		text-align: center;
 		.report-label{
 			display: flex;
 			align-items: center;
@@ -530,6 +486,7 @@
 		.tips-content{
 			font-size: 24upx;
 			color: #666;
+			margin-bottom: 80upx;
 		}
 		.isGetReport{
 			background-color: #ccc;

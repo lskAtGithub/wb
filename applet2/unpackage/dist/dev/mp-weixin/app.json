@@ -1,6 +1,9 @@
 {
   "pages": [
+<<<<<<< HEAD
     "pages/report/report",
+=======
+>>>>>>> 63cb35bcd4811d73bae689bb37038c6621af4aae
     "pages/main/main",
     "pages/HFive/HFive",
     "pages/buyCar/buyCar",

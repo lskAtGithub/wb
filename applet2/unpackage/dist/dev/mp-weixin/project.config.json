@@ -5,35 +5,47 @@
 	},
 	"setting": {
 		"urlCheck": false,
+		"scopeDataCheck": false,
+		"coverView": true,
 		"es6": true,
+<<<<<<< HEAD
 		"enhance": false,
 		"postcss": false,
+=======
+		"postcss": true,
+		"compileHotReLoad": false,
+>>>>>>> 63cb35bcd4811d73bae689bb37038c6621af4aae
 		"preloadBackgroundData": false,
 		"minified": true,
-		"newFeature": false,
-		"coverView": true,
-		"nodeModules": false,
 		"autoAudits": false,
-		"showShadowRootInWxmlPanel": true,
-		"scopeDataCheck": false,
+		"newFeature": false,
 		"uglifyFileName": false,
+		"uploadWithSourceMap": true,
+		"useIsolateContext": true,
+		"nodeModules": false,
+		"enhance": false,
+		"useCompilerModule": false,
+		"userConfirmedUseCompilerModuleSwitch": false,
+		"showShadowRootInWxmlPanel": true,
 		"checkInvalidKey": true,
 		"checkSiteMap": true,
-		"uploadWithSourceMap": true,
-		"compileHotReLoad": false,
 		"babelSetting": {
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
+<<<<<<< HEAD
 		},
 		"useIsolateContext": true,
 		"useCompilerModule": false,
 		"userConfirmedUseCompilerModuleSwitch": false
+=======
+		}
+>>>>>>> 63cb35bcd4811d73bae689bb37038c6621af4aae
 	},
 	"compileType": "miniprogram",
 	"libVersion": "",
 	"appid": "wx251f3baaf6511d58",
-	"projectname": "查车准",
+	"projectname": "%E6%9F%A5%E8%BD%A6%E5%87%86",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"condition": {
