@@ -1,15 +1,15 @@
 {
 	"pages": [
 		{
-			"path": "pages/HFive/HFive",
-			"style": {
-				"navigationBarTitleText": "报告详情"
-			}
-		},
-		{
 			"path": "pages/main/main",
 			"style": {
 				"navigationBarTitleText": "查询"
+			}
+		},
+		{
+			"path": "pages/HFive/HFive",
+			"style": {
+				"navigationBarTitleText": "报告详情"
 			}
 		},
 		{

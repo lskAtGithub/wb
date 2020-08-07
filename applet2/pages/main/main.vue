@@ -29,7 +29,6 @@
 		<view class="search-box" @tap="search">
 			<view class="search-btn">查 询</view>
 		</view>
-<<<<<<< HEAD
 		<view class="tips-box">
 			<view style="color: #0f0f0f; font-size: 24upx;font-weight: bold;">温馨提示：</view>
 			<view>1：车架号为必填项目，可通过拍照智能识别车架号。发动机号码与车牌号为非必填项目，部分汽车品牌需提供发动机号与车牌号才可查询；</view>
@@ -37,11 +36,6 @@
 			<view>3：不同品牌查询费用有所不同，价格请以输入车架号后显示的品牌价格为准；</view>
 			<view>4：若查询失败，请联系客服退还查询费用，平台不收取任何查询失败费用；</view>
 			<view>5：数据来源于网络第三方平台，请勿将此数据用于非法用途。查询报告结果仅供车况参考，不做任何交易担保和诉讼依据。</view>
-=======
-		
-		<view class="search-box" @tap="getReport">
-			<view class="search-btn">查 询 2</view>
->>>>>>> 3fce5c6426319ee1551dfba6aec11a9ad12985d8
 		</view>
 		<!-- 支付popup -->
 		<view class="pay-model-shade" v-show="payModel"></view>
@@ -71,13 +65,10 @@
 		<view class="pay-model-shade" v-show="reportModel"></view>
 		<view class="pay-model-box report-box" v-show="reportModel">
 			<view class="report-label">
-				<image v-if="!isGetReport" src="../../static/img/loading.png" class="load" mode=""></image>
-				<text class="t1 t" v-if="!isGetReport">报告生成中</text>
-				<text class="t1 t" v-if="isGetReport">报告已生成</text>
+				<image src="../../static/img/loading.png" class="load" mode=""></image>
+				<text class="t1 t">报告生成中</text>
 			</view>
-			<view class="tips-content" v-if="!isGetReport">报告正在生成中, 请稍后...您也可以稍后去我的报告中查看</view>
-			<view class="tips-content" v-else>报告已生成, 点击查看, 您也可以稍后去我的报告中查看</view>
-			<view class="create-btn" :class="{'isGetReport': !isGetReport}" @tap="getReport">查看报告</view>
+			<view class="tips-content">购买成功，可在我的报告中查看</view>
 			<view class="close-btn" @tap="reportModel=false">关闭</view>
 		</view>
 	</view>
@@ -99,7 +90,6 @@
 		},
 		data() {
 			return {
-				isGetReport: false,
 				reportModel: false,
 				isBrandName: false,
 				brandList: [],
@@ -117,16 +107,10 @@
 					}
 				],
 				swiperType: true,
-<<<<<<< HEAD
-				vinVal: 'LFMKV30F6B0085121',
+				vinVal: '',
 				brandId: '',
 				timer: null,
 				carKeyVal: ''
-=======
-				// vinVal: 'LFMKV30F6B0085121',
-				vinVal: 'LSVX065N5G2158772',
-				brandId: ''
->>>>>>> 3fce5c6426319ee1551dfba6aec11a9ad12985d8
 			}
 		},
 		onShow() {
@@ -134,7 +118,6 @@
 		},
 		methods: {
 			...mapMutations(['logout']),
-<<<<<<< HEAD
 			getHFiveUrl(){
 				const that = this
 				that.$quest({
@@ -158,54 +141,6 @@
 				const that = this
 				uni.navigateTo({
 					url: '../HFive/HFive'
-				})
-			},
-			// 获取报告状态
-			getReportStatus(){
-				const that = this
-				that.$quest({
-					url: '/api/qscc/v1/report/get-report-status',
-					data: {
-						vin: that.vinVal,
-						report_order_id: '',
-					},
-					noErrorTip: true,
-					success: (res)=>{
-						that.isGetReport = true
-						clearInterval(that.timer)
-						that.getReport()
-					}
-				})
-			},
-			// 获取报告
-			getReport(){
-				const that = this
-				// if(!that.isGetReport){
-				// 	return
-				// }
-				that.$quest({
-					url: '/api/qscc/v1/report/list',
-					data:{
-						page: 1,
-=======
-			getReport(){
-				const that = this
-				that.$quest({
-					url: '/api/qscc/v1/report/buy-report',
-					data: {
->>>>>>> 3fce5c6426319ee1551dfba6aec11a9ad12985d8
-						vin: that.vinVal
-					},
-					success: (res)=>{
-						console.log(res);
-<<<<<<< HEAD
-						uni.setStorageSync('wapUrl', res.data)
-						uni.navigateTo({
-							url: '../HFive/HFive'
-						})
-=======
->>>>>>> 3fce5c6426319ee1551dfba6aec11a9ad12985d8
-					}
 				})
 			},
 			isPay(){
@@ -249,10 +184,7 @@
 							signType: 'MD5',
 							paySign: res.data.paySign,
 							success: function(res) {
-								console.log('success:' + JSON.stringify(res));
-								that.timer = setInterval(()=>{
-									that.getReportStatus()
-								},3000)
+								that.reportModel = true
 							},
 							fail: function(err) {
 								console.log('fail:' + JSON.stringify(err));
@@ -518,7 +450,8 @@
 	}
 	
 	.pay-model-box.report-box{
-		height: 420upx;
+		height: 320upx;
+		text-align: center;
 		.report-label{
 			display: flex;
 			align-items: center;
@@ -531,7 +464,8 @@
 				margin-right: 10upx;
 			}
 			.t{
-				font-size: 26upx;				font-weight: bold;
+				font-size: 26upx;
+				font-weight: bold;
 			}
 			// .t1{
 			// 	animation: jump 3s  linear infinite;
@@ -552,6 +486,7 @@
 		.tips-content{
 			font-size: 24upx;
 			color: #666;
+			margin-bottom: 80upx;
 		}
 		.isGetReport{
 			background-color: #ccc;

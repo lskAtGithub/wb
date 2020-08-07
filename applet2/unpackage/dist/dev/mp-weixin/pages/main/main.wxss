@@ -140,7 +140,8 @@
   margin-top: 20rpx;
 }
 .pay-model-box.report-box.data-v-52f690a6 {
-  height: 420rpx;
+  height: 320rpx;
+  text-align: center;
 }
 .pay-model-box.report-box .report-label.data-v-52f690a6 {
   display: -webkit-box;
@@ -168,6 +169,7 @@
 .pay-model-box.report-box .tips-content.data-v-52f690a6 {
   font-size: 24rpx;
   color: #666;
+  margin-bottom: 80rpx;
 }
 .pay-model-box.report-box .isGetReport.data-v-52f690a6 {
   background-color: #ccc;
