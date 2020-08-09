@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "查询",
-  "usingComponents": {
-    "tki-float-keyboard": "/components/tki-float-keyboard/tki-float-keyboard",
-    "bw-swiper": "/wxcomponents/bw-swiper/bw-swiper"
-  }
-}
