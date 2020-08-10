@@ -1,11 +1,14 @@
 {
   "pages": [
+<<<<<<< HEAD
+    "pages/report/report",
+=======
+>>>>>>> 63cb35bcd4811d73bae689bb37038c6621af4aae
     "pages/main/main",
     "pages/HFive/HFive",
     "pages/buyCar/buyCar",
     "pages/user/user",
     "pages/feedback/feedback",
-    "pages/report/report",
     "pages/report/pageReport",
     "pages/login/login",
     "pages/reg/reg",

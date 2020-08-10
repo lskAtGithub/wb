@@ -6,8 +6,18 @@
 	"setting": {
 		"urlCheck": false,
 		"es6": true,
+<<<<<<< HEAD
 		"enhance": false,
 		"postcss": true,
+=======
+<<<<<<< HEAD
+		"enhance": false,
+		"postcss": false,
+=======
+		"postcss": true,
+		"compileHotReLoad": false,
+>>>>>>> 63cb35bcd4811d73bae689bb37038c6621af4aae
+>>>>>>> 7e29a715f46b08b2f6f7789af0281097897ff2f2
 		"preloadBackgroundData": false,
 		"minified": true,
 		"newFeature": false,
@@ -25,10 +35,21 @@
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
+<<<<<<< HEAD
 		},
 		"useIsolateContext": true,
 		"useCompilerModule": true,
 		"userConfirmedUseCompilerModuleSwitch": false
+=======
+<<<<<<< HEAD
+		},
+		"useIsolateContext": true,
+		"useCompilerModule": false,
+		"userConfirmedUseCompilerModuleSwitch": false
+=======
+		}
+>>>>>>> 63cb35bcd4811d73bae689bb37038c6621af4aae
+>>>>>>> 7e29a715f46b08b2f6f7789af0281097897ff2f2
 	},
 	"compileType": "miniprogram",
 	"libVersion": "",

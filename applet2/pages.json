@@ -1,6 +1,5 @@
 {
-	"pages": [
-		{
+	"pages": [{
 			"path": "pages/main/main",
 			"style": {
 				"navigationBarTitleText": "查询"
@@ -32,10 +31,10 @@
 			}
 		},
 		{
-			"path": "pages/report/report",
-			"style": {
-				"navigationBarTitleText": "报告"
-			}
+			"pagePath": "pages/report/report",
+			"text": "报告",
+			"iconPath": "static/img/report.png",
+			"selectedIconPath": "static/img/report1.png"
 		},
 		{
 			"path": "pages/report/pageReport",
@@ -48,13 +47,13 @@
 			"style": {
 				"navigationBarTitleText": "登录"
 			}
-		}, 
+		},
 		{
 			"path": "pages/reg/reg",
 			"style": {
 				"navigationBarTitleText": "注册"
 			}
-		}, 
+		},
 		{
 			"path": "pages/pwd/pwd",
 			"style": {
@@ -66,8 +65,7 @@
 		"color": "#7a7e83",
 		"selectedColor": "#0faeff",
 		"backgroundColor": "#ffffff",
-		"list": [
-			{
+		"list": [{
 				"pagePath": "pages/main/main",
 				"text": "查询",
 				"iconPath": "static/img/search.png",
