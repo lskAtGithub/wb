@@ -1,5 +1,6 @@
 {
-	"pages": [{
+	"pages": [
+		{
 			"path": "pages/main/main",
 			"style": {
 				"navigationBarTitleText": "查询"
@@ -31,10 +32,16 @@
 			}
 		},
 		{
-			"pagePath": "pages/report/report",
-			"text": "报告",
-			"iconPath": "static/img/report.png",
-			"selectedIconPath": "static/img/report1.png"
+			"path": "pages/report/report",
+			"style": {
+				"navigationBarTitleText": "报告"
+			}
+		},
+		{
+			"path": "pages/report/reportDetail",
+			"style": {
+				"navigationBarTitleText": "报告"
+			}
 		},
 		{
 			"path": "pages/report/pageReport",

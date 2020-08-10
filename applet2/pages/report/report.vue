@@ -4,7 +4,7 @@
 			<text class="topbar-item" v-for="(item,index) in topbarList" :key="index">{{item.title}}</text>
 		</view> -->
 		<view class="lists" v-if="!isEmpty">
-			<view class="list" v-for="(item,index) in reportList" :key="index">
+			<view class="list" v-for="(item,index) in reportList" :key="index" @tap="toHFive(item)">
 				<view class="content">
 					<view class="content-item">
 						<view class="label">VIN</view>
@@ -37,6 +37,8 @@
 </template>
 
 <script>
+	import { mapState, mapMutations } from 'vuex'
+	
 	export default {
 		onShow() {
 			// this.reportList = []
@@ -65,6 +67,7 @@
 			this.getList()
 		},
 		methods: {
+			...mapMutations(['saveWapUrl']),
 			getList(){
 				const that = this
 				that.$quest({
@@ -84,6 +87,17 @@
 						})
 						that.page++
 					}
+				})
+			},
+			toHFive(item){
+				const that = this
+				if(true){
+					that.$showModel('报告正在生成中，请稍等')
+					return
+				}
+				that.saveWapUrl(item.wap_url)
+				uni.navigateTo({
+					url: './reportDetail'
 				})
 			}
 		}
