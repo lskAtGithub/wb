@@ -32,9 +32,9 @@
 		},
 		{
 			"pagePath": "pages/report/report",
-			"text": "报告",
-			"iconPath": "static/img/report.png",
-			"selectedIconPath": "static/img/report1.png"
+			"style": {
+				"navigationBarTitleText": "报告"
+			}
 		},
 		{
 			"path": "pages/report/pageReport",

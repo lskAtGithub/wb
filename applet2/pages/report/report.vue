@@ -4,7 +4,7 @@
 			<text class="topbar-item" v-for="(item,index) in topbarList" :key="index">{{item.title}}</text>
 		</view> -->
 		<view class="lists" v-if="!isEmpty">
-			<view class="list" v-for="(item,index) in reportList" :key="index">
+			<view class="list" v-for="(item,index) in reportList" :key="index" @tap="toHFive(item)">
 				<view class="content">
 					<view class="content-item">
 						<view class="label">VIN</view>
@@ -65,6 +65,9 @@
 			this.getList()
 		},
 		methods: {
+			toHFive(item){
+				
+			},
 			getList(){
 				const that = this
 				that.$quest({
