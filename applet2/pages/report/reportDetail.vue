@@ -5,7 +5,8 @@
 <script>
 	export default {
 		onShow() {
-			that.src = uni.getStorageSync('wapUrl')
+			this.src = uni.getStorageSync('wapUrl')
+			console.log(this.src);
 		},
 		data(){
 			return {

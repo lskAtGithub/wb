@@ -6,7 +6,7 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
 	state: {
 		hasLogin: false,
-		url: 'https://qscc.halopay.cn',
+		url: 'https://www.51qscc.com',
 		token: '',
 		userInfo: {
 			nickName: '',

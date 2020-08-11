@@ -8,24 +8,24 @@
 				<view class="content">
 					<view class="content-item">
 						<view class="label">VIN</view>
-						<view class="value">12346545641</view>
+						<view class="value">{{item.vin}}</view>
 					</view>
 					<view class="content-item">
 						<view class="label">发动机号</view>
-						<view class="value">12346545641</view>
+						<view class="value">{{item.engin_no}}</view>
 					</view>
 					<view class="content-item">
 						<view class="label">车牌号</view>
-						<view class="value">12346545641</view>
+						<view class="value">{{item.licenseplate}}</view>
 					</view>
 					<view class="content-item">
 						<view class="label">订单号</view>
-						<view class="value">12346545641</view>
+						<view class="value">{{item.order_sn}}</view>
 					</view>
 				</view>
 				<view class="status">
-					<image v-if="true" src="../../static/img/waitDown.png" class="report-icon" mode=""></image>
-					<image v-else src="../../static/img/report-icon.png" class="report-icon" mode=""></image>
+					<image v-if="item.status === '1'" src="../../static/img/report-icon.png" class="report-icon" mode=""></image>
+					<image v-else src="../../static/img/waitDown.png" class="report-icon" mode=""></image>
 				</view>
 			</view>
 		</view>
@@ -41,8 +41,9 @@
 	
 	export default {
 		onShow() {
-			// this.reportList = []
-			// this.getList()
+			this.page = 1
+			this.reportList = []
+			this.getList()
 		},
 		data(){
 			return{
@@ -71,7 +72,7 @@
 			getList(){
 				const that = this
 				that.$quest({
-					url: '/api/qscc/v1/report/list',
+					url: '/api/qscc/v1/order/list',
 					data: {
 						vin: '',
 						page: that.page
@@ -91,14 +92,15 @@
 			},
 			toHFive(item){
 				const that = this
-				if(true){
+				if(item.status === '1'){
+					that.saveWapUrl(item.report.wap_url)
+					uni.navigateTo({
+						url: './reportDetail'
+					})
+				}else{
 					that.$showModel('报告正在生成中，请稍等')
 					return
 				}
-				that.saveWapUrl(item.wap_url)
-				uni.navigateTo({
-					url: './reportDetail'
-				})
 			}
 		}
 	}
@@ -124,8 +126,8 @@
 			width: 80vw;
 			margin: 40upx 10vw;
 			.list{
-				margin-bottom: 40upx;
-				padding: 20upx;
+				margin-bottom: 30upx;
+				padding: 0 20upx;
 				border-radius: 8upx;
 				background-color: #fff;
 				box-shadow: 0 0 10upx 0 #ccc;
@@ -143,7 +145,7 @@
 						display: flex;
 						align-items: center;
 						justify-content: flex-start;
-						font-size: 26upx;
+						font-size: 24upx;
 						.label{
 							width: 150upx;
 							color: #666;
@@ -151,15 +153,18 @@
 						.value{
 							color: #bcbcbc;
 							padding: 10upx;
-							// border-bottom: 1px solid #666;
+							flex: 1;
+							overflow: hidden;
+							text-overflow:ellipsis;
+							white-space: nowrap;
+							width: 240upx;
 						}
 					}
 				}
 				.status{
 					.report-icon{
-						width: 130upx;
-						height: 140upx;
-						margin-left: 20upx;
+						width: 80upx;
+						height: 80upx;
 					}
 				}
 			}
