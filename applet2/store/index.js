@@ -12,7 +12,8 @@ const store = new Vuex.Store({
 			nickName: '',
 			gender: '',
 			avatar: ''
-		}
+		},
+		wapUrl: ''
 	},
 	mutations: {
 		saveInfo(state, provider){
@@ -30,6 +31,10 @@ const store = new Vuex.Store({
 		logout(state) {
 			state.hasLogin = false;
 			uni.setStorageSync('hasLogin',false)
+		},
+		saveWapUrl(state,provider){
+			state.wapUrl = provider
+			uni.setStorageSync('wapUrl',provider)
 		}
 	}
 })

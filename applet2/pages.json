@@ -1,5 +1,6 @@
 {
-	"pages": [{
+	"pages": [
+		{
 			"path": "pages/main/main",
 			"style": {
 				"navigationBarTitleText": "查询"
@@ -31,7 +32,13 @@
 			}
 		},
 		{
-			"pagePath": "pages/report/report",
+			"path": "pages/report/report",
+			"style": {
+				"navigationBarTitleText": "报告"
+			}
+		},
+		{
+			"path": "pages/report/reportDetail",
 			"style": {
 				"navigationBarTitleText": "报告"
 			}

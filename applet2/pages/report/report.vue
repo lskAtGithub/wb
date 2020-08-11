@@ -37,6 +37,8 @@
 </template>
 
 <script>
+	import { mapState, mapMutations } from 'vuex'
+	
 	export default {
 		onShow() {
 			// this.reportList = []
@@ -65,9 +67,7 @@
 			this.getList()
 		},
 		methods: {
-			toHFive(item){
-				
-			},
+			...mapMutations(['saveWapUrl']),
 			getList(){
 				const that = this
 				that.$quest({
@@ -87,6 +87,17 @@
 						})
 						that.page++
 					}
+				})
+			},
+			toHFive(item){
+				const that = this
+				if(true){
+					that.$showModel('报告正在生成中，请稍等')
+					return
+				}
+				that.saveWapUrl(item.wap_url)
+				uni.navigateTo({
+					url: './reportDetail'
 				})
 			}
 		}

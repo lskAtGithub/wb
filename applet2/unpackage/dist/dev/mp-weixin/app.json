@@ -5,6 +5,8 @@
     "pages/buyCar/buyCar",
     "pages/user/user",
     "pages/feedback/feedback",
+    "pages/report/report",
+    "pages/report/reportDetail",
     "pages/report/pageReport",
     "pages/login/login",
     "pages/reg/reg",
