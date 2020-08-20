@@ -1,21 +1,100 @@
 {
-	"pages": [{
+	"pages": [
+		{
 			"path": "pages/main/main",
 			"style": {
 				"navigationBarTitleText": "查询"
 			}
 		},
 		{
+			"path": "pages/buyCar/buyCar",
+			"style": {
+				"navigationBarTitleText": "看车"
+			}
+		},
+		{
 			"path": "pages/user/user",
 			"style": {
-				"navigationBarTitleText": "个人中心"
+				"navigationBarTitleText": "个人中心",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/feedback/feedback",
+			"style": {
+				"navigationBarTitleText": "意见反馈"
+			}
+		},
+		{
+			"path": "pages/report/report",
+			"style": {
+				"navigationBarTitleText": "报告"
+			}
+		},
+		{
+			"path": "pages/report/reportDetail",
+			"style": {
+				"navigationBarTitleText": "报告"
+			}
+		},
+		{
+			"path": "pages/report/pageReport",
+			"style": {
+				"navigationBarTitleText": "报告"
+			}
+		},
+		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录"
+			}
+		},
+		{
+			"path": "pages/reg/reg",
+			"style": {
+				"navigationBarTitleText": "注册"
+			}
+		},
+		{
+			"path": "pages/pwd/pwd",
+			"style": {
+				"navigationBarTitleText": "找回密码"
 			}
 		}
 	],
+	"tabBar": {
+		"color": "#7a7e83",
+		"selectedColor": "#0faeff",
+		"backgroundColor": "#ffffff",
+		"list": [{
+				"pagePath": "pages/main/main",
+				"text": "查询",
+				"iconPath": "static/img/search.png",
+				"selectedIconPath": "static/img/search(1).png"
+			},
+			{
+				"pagePath": "pages/buyCar/buyCar",
+				"text": "看车",
+				"iconPath": "static/img/buyCar.png",
+				"selectedIconPath": "static/img/buyCar1.png"
+			},
+			{
+				"pagePath": "pages/report/report",
+				"text": "报告",
+				"iconPath": "static/img/report.png",
+				"selectedIconPath": "static/img/report1.png"
+			},
+			{
+				"pagePath": "pages/user/user",
+				"text": "我的",
+				"iconPath": "static/img/user.png",
+				"selectedIconPath": "static/img/userHL.png"
+			}
+		]
+	},
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
-		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#007AFF",
-		"backgroundColor": "#FFFFFF"
+		"navigationBarBackgroundColor": "#4a68e9",
+		"backgroundColor": "#f0f0f0"
 	}
 }

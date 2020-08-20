@@ -124,7 +124,9 @@
 					url: '/api/qscc/v1/report/share-report',
 					success: (res)=>{
 						uni.setStorageSync('wapUrl', res.data.wap_url)
-						that.toLink()
+						uni.navigateTo({
+							url: '../report/reportDetail'
+						})
 					}
 				})
 			},
@@ -136,12 +138,6 @@
 			},
 			keyVal(v){
 				this.carKeyVal += v
-			},
-			toLink(){
-				const that = this
-				uni.navigateTo({
-					url: '../HFive/HFive'
-				})
 			},
 			isPay(){
 				const that = this

@@ -1,28 +1,26 @@
 <script>
-export default {
-	onLaunch: function() {
-		console.log('App Launch');
-	},
-	onShow: function() {
-		console.log('App Show');
-	},
-	onHide: function() {
-		console.log('App Hide');
+	import { mapMutations } from 'vuex';
+	export default {
+		methods: {
+			...mapMutations(['login','saveInfo','saveToken'])
+		},
+		onLaunch() {
+			let userInfo = uni.getStorageSync('userInfo') || '';
+			console.log(uni.getStorageSync('token'));
+			if (userInfo.nickName) {
+				this.login()
+				this.saveInfo(userInfo)
+				this.saveToken(uni.getStorageSync('token'))
+			}
+		}
 	}
-};
 </script>
 
 <style>
-/* 解决头条小程序组件内引入字体不生效的问题 */
-/* #ifdef MP-TOUTIAO */
-@font-face {
-	font-family: uniicons;
-	src: url('/static/uni.ttf');
-}
-/* #endif */
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
+	/* reset */
+	*{
+		padding: 0;
+		margin: 0;
+		box-sizing: border-box;
+	}
 </style>

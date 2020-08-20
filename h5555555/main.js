@@ -73,7 +73,12 @@ Vue.prototype.$quest = function (obj){
 		uni.showModal({
 			title: '提示',
 			content:'请先登录',
-			showCancel:false
+			showCancel:false,
+			complete() {
+				uni.switchTab({
+					url: '/pages/user/user'
+				})
+			}
 		})
 	}
 }

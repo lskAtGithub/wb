@@ -90,6 +90,7 @@
 		},
 		data() {
 			return {
+				index: 0,
 				reportModel: false,
 				isBrandName: false,
 				brandList: [],
@@ -124,7 +125,9 @@
 					url: '/api/qscc/v1/report/share-report',
 					success: (res)=>{
 						uni.setStorageSync('wapUrl', res.data.wap_url)
-						that.toLink()
+						uni.navigateTo({
+							url: '../report/reportDetail'
+						})
 					}
 				})
 			},
@@ -136,12 +139,6 @@
 			},
 			keyVal(v){
 				this.carKeyVal += v
-			},
-			toLink(){
-				const that = this
-				uni.navigateTo({
-					url: '../HFive/HFive'
-				})
 			},
 			isPay(){
 				const that = this
@@ -169,7 +166,7 @@
 			pay() {
 				const that = this
 				that.$quest({
-					url: '/api/qscc/v1/order/mp-pay',
+					url: '/api/qscc/v1/order/wechat-pay',
 					data: {
 						vin: that.vinVal,
 						licenseplate: that.carKeyVal

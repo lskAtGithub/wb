@@ -1,7 +1,6 @@
 {
   "pages": [
     "pages/main/main",
-    "pages/HFive/HFive",
     "pages/buyCar/buyCar",
     "pages/user/user",
     "pages/feedback/feedback",
@@ -50,6 +49,5 @@
     ]
   },
   "permission": {},
-  "usingComponents": {},
-  "sitemapLocation": "sitemap61.json"
+  "usingComponents": {}
 }
