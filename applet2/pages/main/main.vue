@@ -26,8 +26,9 @@
 			</view>
 		</view>
 		<view style="text-align: right; font-size: 24upx; color: #007AFF; margin: 0 40upx;" @tap="getHFiveUrl">查看实例报告</view>
-		<view class="search-box" @tap="search">
-			<view class="search-btn">查 询</view>
+		<view class="search-box">
+			<view class="search-btn" @tap="search('mt')">维保查询</view>
+			<view class="search-btn" @tap="search('ir')">出险查询</view>
 		</view>
 		<view class="tips-box">
 			<view style="color: #0f0f0f; font-size: 24upx;font-weight: bold;">温馨提示：</view>
@@ -110,7 +111,8 @@
 				vinVal: '',
 				brandId: '',
 				timer: null,
-				carKeyVal: ''
+				carKeyVal: '',
+				checkType: 'mt'  //维保：mt； 出险：ir；
 			}
 		},
 		onShow() {
@@ -168,7 +170,8 @@
 					url: '/api/qscc/v1/order/mp-pay',
 					data: {
 						vin: that.vinVal,
-						licenseplate: that.carKeyVal
+						licenseplate: that.carKeyVal,
+						check_type: that.checkType
 					},
 					success: (res) => {
 						uni.requestPayment({
@@ -265,12 +268,13 @@
 				this.brandId = val.detail.value
 				this.brandName = this.brandList[this.brandId]
 			},
-			search() {
+			search(type) {
 				const that = this
 				if (!that.vinVal) {
 					that.$showModel('请输入vin码')
 					return
 				}
+				that.checkType = type
 				that.$quest({
 					url: '/api/qscc/v1/report/check-brand',
 					method: 'GET',
@@ -377,6 +381,9 @@
 
 	.search-box {
 		padding: 30upx 40upx;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
 	}
 
 	.search-box .search-btn {
@@ -386,6 +393,11 @@
 		text-align: center;
 		color: #fff;
 		padding: 20upx 0;
+		flex: 1;
+		margin-right: 40upx;
+		&:last-child{
+			margin-right: 0;
+		}
 	}
 	.pay-model-shade{
 		position: fixed;

@@ -31,7 +31,7 @@
 		</view>
 		<view class="empty" v-else>
 			<view><image class="empty-icon" src="../../static/img/null.png" mode=""></image></view>
-			<view>暂无报告</view>
+			<view>暂无维保报告</view>
 		</view>
 	</view>
 </template>

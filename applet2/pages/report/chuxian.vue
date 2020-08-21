@@ -31,7 +31,7 @@
 		</view>
 		<view class="empty" v-else>
 			<view><image class="empty-icon" src="../../static/img/null.png" mode=""></image></view>
-			<view>暂无报告</view>
+			<view>暂无出险报告</view>
 		</view>
 	</view>
 </template>
@@ -76,7 +76,7 @@
 					data: {
 						vin: '',
 						page: that.page,
-						check_type: 'mt'
+						check_type: 'ir'
 					},
 					success:(res)=>{
 						if(res.data && res.data.length){

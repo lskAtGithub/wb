@@ -43,7 +43,8 @@
 					url: '/api/qscc/v1/report/list',
 					data: {
 						vin: '',
-						page: that.page
+						page: that.page,
+						check_type: 'mt'
 					},
 					success:(res)=>{
 						console.log(res);

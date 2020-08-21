@@ -44,6 +44,24 @@
 			}
 		},
 		{
+			"path": "pages/report/weibao",
+			"style": {
+				"navigationBarTitleText": "维保"
+			}
+		},
+		{
+			"path": "pages/report/chuxian",
+			"style": {
+				"navigationBarTitleText": "出险"
+			}
+		},
+		{
+			"path": "pages/report/irReport",
+			"style": {
+				"navigationBarTitleText": "出险详情"
+			}
+		},
+		{
 			"path": "pages/login/login",
 			"style": {
 				"navigationBarTitleText": "登录"
@@ -73,14 +91,14 @@
 				"selectedIconPath": "static/img/search(1).png"
 			},
 			{
-				"pagePath": "pages/buyCar/buyCar",
-				"text": "看车",
-				"iconPath": "static/img/buyCar.png",
-				"selectedIconPath": "static/img/buyCar1.png"
+				"pagePath": "pages/report/weibao",
+				"text": "维保",
+				"iconPath": "static/img/report.png",
+				"selectedIconPath": "static/img/report1.png"
 			},
 			{
-				"pagePath": "pages/report/report",
-				"text": "报告",
+				"pagePath": "pages/report/chuxian",
+				"text": "出险",
 				"iconPath": "static/img/report.png",
 				"selectedIconPath": "static/img/report1.png"
 			},
