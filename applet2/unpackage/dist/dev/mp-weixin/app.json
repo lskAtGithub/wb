@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/report/irReport",
     "pages/main/main",
     "pages/buyCar/buyCar",
     "pages/user/user",
@@ -9,7 +10,6 @@
     "pages/report/pageReport",
     "pages/report/weibao",
     "pages/report/chuxian",
-    "pages/report/irReport",
     "pages/login/login",
     "pages/reg/reg",
     "pages/pwd/pwd"
