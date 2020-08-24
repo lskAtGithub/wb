@@ -2,17 +2,17 @@
 	<view class="page">
 		<view class="head-box">
 			<view class="avatar">
-				<image src="../../static/h5icon/V.png" class="car-icon" mode=""></image>
+				<image :src="obj.notify_url" class="car-icon" mode=""></image>
 			</view>
 			<view class="right-content">
-				<view style="color: #232323;font-size: 30upx;">订单号: RP1288677879189606400</view>
-				<view style="font-size: 26upx; color: #cccccc;">WAUAGD4L0CD032131</view>
+				<view style="color: #232323;font-size: 30upx;">订单号: {{obj.order_sn}}</view>
+				<view style="font-size: 26upx; color: #cccccc;">{{item.vin}}</view>
 				<view class="right-item"> <text v-for="(item,index) in headList" :key="index" :class="{'active': item.active}" class="right-item-label">{{item.label}}</text> </view>
 			</view>
 		</view>
 		<view class="update-time">
 			<text>报告更新时间:</text>
-			<text style="color: #ccc;">2020-07-30 11:28:56.0</text>
+			<text style="color: #ccc;">{{$dateStr(obj.updated_at)}}</text>
 		</view>
 		<view class="title-box">
 			<view class="icon"></view>
@@ -61,8 +61,26 @@
 
 <script>
 	export default{
+		onLoad(e) {
+			const that = this
+			that.$quest({
+				url: '/api/qscc/v1/order/list',
+				data: {
+					vin: e.vin,
+					page: 1,
+					check_type: 'ir'
+				},
+				success: (res)=>{
+					that.obj = res.data[0]
+					that.reportInfo = JSON.parse(res.data[0].report.json_data)
+					console.log(that.reportInfo);
+				}
+			})
+		},
 		data(){
 			return {
+				obj: {},
+				reportInfo: [],
 				headList: [
 					{
 						label: '维保',

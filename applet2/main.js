@@ -18,6 +18,23 @@ Vue.prototype.$showModel = function(content="",complete){
 		}
 	})
 }
+Vue.prototype.$dateStr = function (time,type="date"){
+	let y,m,d,H,M,S,result
+	let date = new Date(time * 1000)
+	y = date.getFullYear()
+	m = date.getMonth() + 1
+	d = date.getDate()
+	H = date.getHours()
+	M = date.getMinutes()
+	S = date.getSeconds()
+	if(type === 'date'){
+		result = `${y}-${m}-${d}`
+	}else{
+		result = `${y}-${m}-${d} ${H}:${M}:${S}`
+	}
+	
+	return result
+}
 Vue.prototype.$quest = function (obj){
 	if(obj.noToken || store.state.token){
 		uni.showLoading()

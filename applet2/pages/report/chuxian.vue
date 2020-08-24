@@ -93,15 +93,9 @@
 			},
 			toHFive(item){
 				const that = this
-				if(item.status === '1'){
-					that.saveWapUrl(item.report.wap_url)
-					uni.navigateTo({
-						url: './reportDetail'
-					})
-				}else{
-					that.$showModel('报告正在生成中，请稍等')
-					return
-				}
+				uni.navigateTo({
+					url: './irReport?vin=' + item.vin
+				})
 			}
 		}
 	}

@@ -1,15 +1,16 @@
 {
 	"pages": [
-		{
-			"path": "pages/report/irReport",
-			"style": {
-				"navigationBarTitleText": "出险详情"
-			}
-		},
+		
 		{
 			"path": "pages/main/main",
 			"style": {
 				"navigationBarTitleText": "查询"
+			}
+		},
+		{
+			"path": "pages/report/irReport",
+			"style": {
+				"navigationBarTitleText": "出险详情"
 			}
 		},
 		{

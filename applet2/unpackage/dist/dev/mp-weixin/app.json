@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/report/irReport",
     "pages/main/main",
+    "pages/report/irReport",
     "pages/buyCar/buyCar",
     "pages/user/user",
     "pages/feedback/feedback",
