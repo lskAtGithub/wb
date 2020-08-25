@@ -21,19 +21,19 @@
 		<view class="table-box">
 			<view class="table-item">
 				<view class="table-label">车险次数</view>
-				<view class="table-value">1</view>
+				<view class="table-value">{{obj.num}}</view>
 			</view>
 			<view class="table-item">
 				<view class="table-label">材料总金额/费用</view>
-				<view class="table-value">1</view>
+				<view class="table-value">{{obj.renewalAmount}}</view>
 			</view>
 			<view class="table-item">
 				<view class="table-label">理赔总金额</view>
-				<view class="table-value">1</view>
+				<view class="table-value">{{obj.damageMoney}}</view>
 			</view>
 			<view class="table-item">
 				<view class="table-label">维修总金额/费用</view>
-				<view class="table-value">1</view>
+				<view class="table-value">{{obj.repairAmount}}</view>
 			</view>
 		</view>
 		<view class="title-box">
@@ -67,13 +67,23 @@
 				url: '/api/qscc/v1/order/list',
 				data: {
 					vin: e.vin,
-					page: 1,
+					page: '',
 					check_type: 'ir'
 				},
 				success: (res)=>{
 					that.obj = res.data[0]
+					that.obj.num = 0
+					that.obj.renewalAmount = 0
+					that.obj.damageMoney = 0
+					that.obj.repairAmount = 0
 					that.reportInfo = JSON.parse(res.data[0].report.json_data)
 					console.log(that.reportInfo);
+					that.reportInfo.forEach((item,index)=>{
+						that.obj.num = index
+						that.obj.renewalAmount += item.renewalAmount
+						that.obj.damageMoney += item.damageMoney
+						that.obj.repairAmount += item.repairAmount
+					})
 				}
 			})
 		},
