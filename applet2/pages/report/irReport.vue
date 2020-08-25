@@ -6,7 +6,7 @@
 			</view>
 			<view class="right-content">
 				<view style="color: #232323;font-size: 30upx;">订单号: {{obj.order_sn}}</view>
-				<view style="font-size: 26upx; color: #cccccc;">{{item.vin}}</view>
+				<view style="font-size: 26upx; color: #cccccc; margin: 20upx 0;">{{item.licenseplate}}</view>
 				<view class="right-item"> <text v-for="(item,index) in headList" :key="index" :class="{'active': item.active}" class="right-item-label">{{item.label}}</text> </view>
 			</view>
 		</view>
@@ -41,9 +41,35 @@
 			<view class="title">概要信息</view>
 		</view>
 		<view class="time-line-box">
-			<view class="time-line-item">
-				<view class="time-line-item-index"><text class="time-line-item-index-label">1</text></view>
-				<view class="time-line-item-content"></view>
+			<view class="time-line-item" v-for="(item,index) in reportInfo">
+				<view class="time-line-item-index"><text class="time-line-item-index-label">{{index + 1}}</text></view>
+				<view class="time-line-item-content">
+					<view class="time-line-item-content-item">
+						<view class="time-line-item-content-item-label">事故日期:</view>
+						<view class="time-line-item-content-item-value">{{item.dangerTime || '-'}}</view>
+					</view>
+					<view class="time-line-item-content-item">
+						<view class="time-line-item-content-item-label">事故描述:</view>
+						<rich-text class="time-line-item-content-item-value" :nodes="item.claimDetails[0].itemType"></rich-text>
+					</view>
+					<view class="time-line-item-content-item">
+						<view class="time-line-item-content-item-label">维修详情:</view>
+						<rich-text class="time-line-item-content-item-value" :nodes="item.claimDetails[0].itemName"></rich-text>
+					</view>
+					<view class="time-line-item-content-item">
+						<view class="time-line-item-content-item-label">理赔金额:</view>
+						<view class="time-line-item-content-item-value">{{item.damageMoney || '-'}}</view>
+					</view>
+					<view class="time-line-item-content-item">
+						<view class="time-line-item-content-item-label">维修金额:</view>
+						<view class="time-line-item-content-item-value">{{item.repairAmount || '-'}}</view>
+					</view>
+					<view class="time-line-item-content-item">
+						<view class="time-line-item-content-item-label">材料金额:</view>
+						<view class="time-line-item-content-item-value">{{item.renewalAmount || '-'}}</view>
+					</view>
+				</view>
+				
 			</view>
 		</view>
 		<view class="foot">
@@ -66,7 +92,7 @@
 			that.$quest({
 				url: '/api/qscc/v1/order/list',
 				data: {
-					vin: e.vin,
+					order_sn: e.order_sn,
 					page: '',
 					check_type: 'ir'
 				},
@@ -80,9 +106,9 @@
 					console.log(that.reportInfo);
 					that.reportInfo.forEach((item,index)=>{
 						that.obj.num = index
-						that.obj.renewalAmount += item.renewalAmount
-						that.obj.damageMoney += item.damageMoney
-						that.obj.repairAmount += item.repairAmount
+						that.obj.renewalAmount += parseFloat(item.renewalAmount)
+						that.obj.damageMoney += parseFloat(item.damageMoney)
+						that.obj.repairAmount += parseFloat(item.repairAmount)
 					})
 				}
 			})
@@ -229,7 +255,47 @@
 			}
 		}
 		.time-line-box{
-			
+			.time-line-item{
+				display: flex;
+				align-items: flex-start;
+				
+				.time-line-item-index{
+					width: 4upx;
+					margin: 0 40upx;
+					background-color: #000;
+					position: relative;
+					.time-line-item-index-label{
+						position: absolute;
+						top: 0;
+						width: 50upx;
+						height: 50upx;
+						line-height: 50upx;
+						text-align: center;
+						color: #FFFFFF;
+						background-color: #007AFF;
+						border-radius: 100upx;
+						left: -22upx;
+					}
+				}
+				// right content
+				.time-line-item-content{
+					background-color: #FFFFFF;
+					padding: 0 40upx 20upx 40upx;
+					flex: 1;
+					margin-bottom: 30upx;
+					margin-right: 20upx;
+					.time-line-item-content-item{
+						display: flex;
+						margin-top: 20upx;
+						.time-line-item-content-item-label{
+							width: 200upx;
+						}
+						.time-line-item-content-item-value{
+							flex: 1;
+						}
+					}
+				}
+			}
 		}
 	}
 </style>

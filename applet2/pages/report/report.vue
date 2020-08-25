@@ -74,7 +74,7 @@
 				that.$quest({
 					url: '/api/qscc/v1/order/list',
 					data: {
-						vin: '',
+						order_sn: '',
 						page: that.page,
 						check_type: 'mt'
 					},

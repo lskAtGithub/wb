@@ -74,7 +74,7 @@
 				that.$quest({
 					url: '/api/qscc/v1/order/list',
 					data: {
-						vin: '',
+						order_sn: '',
 						page: that.page,
 						check_type: 'ir'
 					},
@@ -92,9 +92,10 @@
 				})
 			},
 			toHFive(item){
+				console.log(item);
 				const that = this
 				uni.navigateTo({
-					url: './irReport?vin=' + item.vin
+					url: './irReport?order_sn=' + item.order_sn
 				})
 			}
 		}
