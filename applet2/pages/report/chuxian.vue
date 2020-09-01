@@ -92,11 +92,15 @@
 				})
 			},
 			toHFive(item){
-				console.log(item);
 				const that = this
-				uni.navigateTo({
-					url: './irReport?order_sn=' + item.order_sn
-				})
+				if(item.status === '1'){
+					uni.navigateTo({
+						url: './irReport?order_sn=' + item.order_sn
+					})
+				}else{
+					that.$showModel('报告正在生成中，请稍等')
+					return
+				}
 			}
 		}
 	}

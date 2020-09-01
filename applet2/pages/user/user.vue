@@ -30,10 +30,17 @@
 				<view class="list-title">意见反馈</view>
 				<image src="../../static/img/right.png" class="icon"></image>
 			</view>
-			<view class="list" @tap="callPhone">
+			<view class="list" @tap="call">
 				<image src="../../static/img/contact.png" class="icon"></image>
 				<view class="list-title">联系客服</view>
 				<image src="../../static/img/right.png" class="icon"></image>
+			</view>
+		</view>
+		<!-- 二维码弹出 -->
+		<view class="code-box" v-show="codeModel">
+			<view class="code-mask" @tap="codeModel = false"></view>
+			<view class="img-box" @tap="showImg">
+				<image style="width: 500upx;height: 500upx;" src="../../static/img/code.jpg" mode=""></image>
 			</view>
 		</view>
 	</view>
@@ -48,7 +55,8 @@
 		},
 		data(){
 			return {
-				phone: ''
+				phone: '',
+				codeModel: false,
 			}
 		},
 		onLoad() {
@@ -60,6 +68,17 @@
 			toLink(url){
 				uni.navigateTo({
 					url: url
+				})
+			},
+			showImg(){
+				const that = this
+				uni.getImageInfo({
+					src: '../../static/img/code.jpg',
+					success(res) {
+						uni.saveImageToPhotosAlbum({
+							filePath: res.path,
+						});
+					}
 				})
 			},
 			getPhone(){
@@ -74,16 +93,9 @@
 					}
 				})
 			},
-			callPhone(){
+			call(){
 				const that = this
-				console.log(this.phone);
-				if(that.phone){
-					uni.makePhoneCall({
-					    phoneNumber:  that.phone.toString(),
-					})
-				}else{
-					that.$showModel('联系电话获取失败，请使用意见反馈')
-				}
+				this.codeModel = true
 			},
 			getUserInfo(){
 				const that = this
@@ -195,5 +207,27 @@
 	width: 50upx;
 	height: 50upx;
 	margin: 0 10upx;
+}
+.code-box{
+	position: relative;
+	.code-mask{
+		width: 100vw;
+		height: 100vh;
+		overflow: hidden;
+		background-color: rgba($color: #000000, $alpha: .7);
+		position: fixed;
+		left: 0;
+		top: 0;
+		z-index: 3;
+	}
+	.img-box{
+		position: fixed;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%,-50%);
+		box-shadow: 0 0 10upx #cccccc;
+		z-index: 6;
+		font-size: 0;
+	}
 }
 </style>

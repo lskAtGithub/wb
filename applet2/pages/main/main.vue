@@ -18,17 +18,20 @@
 		</view>
 		<view class="content">
 			<view class="input-in">
-				<input type="text" class="input" placeholder="查询车辆" v-model="carKeyVal" disabled @tap="carKey">
+				<input type="text" class="input" placeholder="请输入车牌号" v-model="carKeyVal" disabled @tap="carKey">
 				<tki-float-keyboard ref="keyb" mode="car" @del="keyDel" @val="keyVal"></tki-float-keyboard>
 			</view>
 			<view class="icons l-none">
 				<image src="../../static/img/right.png" class="icon"></image>
 			</view>
 		</view>
-		<view style="text-align: right; font-size: 24upx; color: #007AFF; margin: 0 40upx;" @tap="getHFiveUrl">查看实例报告</view>
+		<view>
+			<text @tap="getHFiveUrl" style="text-align: right; font-size: 24upx; color: #007AFF; margin: 0 40upx;">查看维保示例报告</text>
+			<text @tap="getHFiveUrl" style="text-align: right; font-size: 24upx; color: #007AFF; margin: 0 40upx;">查看出险示例报告</text>
+		</view>
 		<view class="search-box">
-			<view class="search-btn" @tap="search('mt')">维保查询</view>
-			<view class="search-btn" @tap="search('ir')">出险查询</view>
+			<view class="search-btn" @tap="pay('mt')">维保查询</view>
+			<view class="search-btn" @tap="pay('ir')">出险查询</view>
 		</view>
 		<view class="tips-box">
 			<view style="color: #0f0f0f; font-size: 24upx;font-weight: bold;">温馨提示：</view>
@@ -164,8 +167,13 @@
 					}
 				}
 			},
-			pay() {
+			pay(type) {
 				const that = this
+				if (!that.vinVal) {
+					that.$showModel('请输入vin码')
+					return
+				}
+				that.checkType = type
 				that.$quest({
 					url: '/api/qscc/v1/order/mp-pay',
 					data: {
