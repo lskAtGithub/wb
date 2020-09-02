@@ -27,7 +27,7 @@
 		</view>
 		<view>
 			<text @tap="getHFiveUrl" style="text-align: right; font-size: 24upx; color: #007AFF; margin: 0 40upx;">查看维保示例报告</text>
-			<text @tap="getHFiveUrl" style="text-align: right; font-size: 24upx; color: #007AFF; margin: 0 40upx;">查看出险示例报告</text>
+			<text @tap="getChuxian" style="text-align: right; font-size: 24upx; color: #007AFF; margin: 0 40upx;">查看出险示例报告</text>
 		</view>
 		<view class="search-box">
 			<view class="search-btn" @tap="pay('mt')">维保查询</view>
@@ -133,6 +133,11 @@
 							url: '../report/reportDetail'
 						})
 					}
+				})
+			},
+			getChuxian(){
+				uni.navigateTo({
+					url: '../report/example'
 				})
 			},
 			carKey(){
