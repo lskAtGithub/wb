@@ -10,7 +10,7 @@
 		</view>
 		<view class="content">
 			<view class="input-in">
-				<input type="text" class="input" v-model="vinVal" maxlength="17" placeholder="请输入17位车架号VIN码">
+				<input type="text" class="input" v-model="vinVal" maxlength="17" placeholder="请输入17位车架号VIN码" @tap="$refs.keyb._keyHide()">
 			</view>
 			<view class="icons" @tap="upload">
 				<image src="../../static/img/xiangji.png" class="icon"></image>
@@ -20,6 +20,14 @@
 			<view class="input-in">
 				<input type="text" class="input" placeholder="请输入车牌号" v-model="carKeyVal" disabled @tap="carKey">
 				<tki-float-keyboard ref="keyb" mode="car" @del="keyDel" @val="keyVal"></tki-float-keyboard>
+			</view>
+			<view class="icons l-none">
+				<image src="../../static/img/right.png" class="icon"></image>
+			</view>
+		</view>
+		<view class="content">
+			<view class="input-in">
+				<input type="text" class="input" placeholder="请输入发动机号" v-model="engineNo" @tap="$refs.keyb._keyHide()">
 			</view>
 			<view class="icons l-none">
 				<image src="../../static/img/right.png" class="icon"></image>
@@ -115,6 +123,7 @@
 				brandId: '',
 				timer: null,
 				carKeyVal: '',
+				engineNo: '',
 				checkType: 'mt'  //维保：mt； 出险：ir；
 			}
 		},
@@ -184,6 +193,7 @@
 					data: {
 						vin: that.vinVal,
 						licenseplate: that.carKeyVal,
+						engineNo: that.engineNo,
 						check_type: that.checkType
 					},
 					success: (res) => {

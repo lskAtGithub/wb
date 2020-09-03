@@ -41,7 +41,7 @@
 			<view class="title">概要信息</view>
 		</view>
 		<view class="time-line-box">
-			<view class="time-line-item" v-for="(item,index) in reportInfo">
+			<view class="time-line-item" v-for="(item,index) in reportInfo" :key="index">
 				<view class="time-line-item-index"><text class="time-line-item-index-label">{{index + 1}}</text></view>
 				<view class="time-line-item-content">
 					<view class="time-line-item-content-item">
@@ -289,6 +289,7 @@
 						margin-top: 20upx;
 						.time-line-item-content-item-label{
 							width: 200upx;
+							white-space: nowrap;
 						}
 						.time-line-item-content-item-value{
 							flex: 1;

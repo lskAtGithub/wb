@@ -5,14 +5,14 @@
 				<image :src="obj.notify_url" class="car-icon" mode=""></image>
 			</view>
 			<view class="right-content">
-				<view style="color: #232323;font-size: 30upx;">订单号: {{obj.order_sn}}</view>
-				<view style="font-size: 26upx; color: #cccccc; margin: 20upx 0;">{{item.licenseplate}}</view>
+				<view style="color: #232323;font-size: 30upx;">订单号: 20200903123456</view>
+				<view style="font-size: 26upx; color: #cccccc; margin: 20upx 0;">XCC124</view>
 				<view class="right-item"> <text v-for="(item,index) in headList" :key="index" :class="{'active': item.active}" class="right-item-label">{{item.label}}</text> </view>
 			</view>
 		</view>
 		<view class="update-time">
 			<text>报告更新时间:</text>
-			<text style="color: #ccc;">{{$dateStr(obj.updated_at)}}</text>
+			<text style="color: #ccc;">2019-11-13</text>
 		</view>
 		<view class="title-box">
 			<view class="icon"></view>
@@ -21,19 +21,19 @@
 		<view class="table-box">
 			<view class="table-item">
 				<view class="table-label">车险次数</view>
-				<view class="table-value">{{obj.num}}</view>
+				<view class="table-value">1</view>
 			</view>
 			<view class="table-item">
 				<view class="table-label">材料总金额/费用</view>
-				<view class="table-value">{{obj.renewalAmount}}</view>
+				<view class="table-value">10000</view>
 			</view>
 			<view class="table-item">
 				<view class="table-label">理赔总金额</view>
-				<view class="table-value">{{obj.damageMoney}}</view>
+				<view class="table-value">10000</view>
 			</view>
 			<view class="table-item">
 				<view class="table-label">维修总金额/费用</view>
-				<view class="table-value">{{obj.repairAmount}}</view>
+				<view class="table-value">10000</view>
 			</view>
 		</view>
 		<view class="title-box">
@@ -41,32 +41,37 @@
 			<view class="title">概要信息</view>
 		</view>
 		<view class="time-line-box">
-			<view class="time-line-item" v-for="(item,index) in reportInfo">
-				<view class="time-line-item-index"><text class="time-line-item-index-label">{{index + 1}}</text></view>
+			<view class="time-line-item">
+				<view class="time-line-item-index"><text class="time-line-item-index-label">1</text></view>
 				<view class="time-line-item-content">
 					<view class="time-line-item-content-item">
 						<view class="time-line-item-content-item-label">事故日期:</view>
-						<view class="time-line-item-content-item-value">{{item.dangerTime || '-'}}</view>
+						<view class="time-line-item-content-item-value">2018-11-12</view>
 					</view>
 					<view class="time-line-item-content-item">
 						<view class="time-line-item-content-item-label">事故描述:</view>
-						<rich-text class="time-line-item-content-item-value" :nodes="item.claimDetails[0].itemType"></rich-text>
+						<!-- <rich-text class="time-line-item-content-item-value" :nodes="item.claimDetails[0].itemType"></rich-text> -->
+						<view class="time-line-item-content-item-value">碰撞 / 两车相碰 本车损 对方车损 无人伤 其它无损 责任不清 建议报交警</view>
 					</view>
 					<view class="time-line-item-content-item">
 						<view class="time-line-item-content-item-label">维修详情:</view>
-						<rich-text class="time-line-item-content-item-value" :nodes="item.claimDetails[0].itemName"></rich-text>
+						<!-- <rich-text class="time-line-item-content-item-value" :nodes="item.claimDetails[0].itemName"></rich-text> -->
+						<view>
+							<p>钣金:后翼子板</p>
+							<p>拆装:后保险杠皮</p>
+						</view>
 					</view>
 					<view class="time-line-item-content-item">
 						<view class="time-line-item-content-item-label">理赔金额:</view>
-						<view class="time-line-item-content-item-value">{{item.damageMoney || '-'}}</view>
+						<view class="time-line-item-content-item-value">10000</view>
 					</view>
 					<view class="time-line-item-content-item">
 						<view class="time-line-item-content-item-label">维修金额:</view>
-						<view class="time-line-item-content-item-value">{{item.repairAmount || '-'}}</view>
+						<view class="time-line-item-content-item-value">10000</view>
 					</view>
 					<view class="time-line-item-content-item">
 						<view class="time-line-item-content-item-label">材料金额:</view>
-						<view class="time-line-item-content-item-value">{{item.renewalAmount || '-'}}</view>
+						<view class="time-line-item-content-item-value">10000</view>
 					</view>
 				</view>
 				
@@ -87,7 +92,8 @@
 
 <script>
 	export default{
-		onLoad(e) {
+		onShow() {
+			console.log(234);
 			const that = this
 			that.$quest({
 				url: '/api/qscc/v1/report/share-insurance-report',
@@ -284,6 +290,7 @@
 						margin-top: 20upx;
 						.time-line-item-content-item-label{
 							width: 200upx;
+							white-space: nowrap;
 						}
 						.time-line-item-content-item-value{
 							flex: 1;

@@ -10,7 +10,13 @@
 		{
 			"path": "pages/report/irReport",
 			"style": {
-				"navigationBarTitleText": "出险详情"
+				"navigationBarTitleText": "维保报告示例"
+			}
+		},
+		{
+			"path": "pages/report/example",
+			"style": {
+				"navigationBarTitleText": "出险报告示例"
 			}
 		},
 		{

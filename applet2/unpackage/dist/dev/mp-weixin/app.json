@@ -2,6 +2,7 @@
   "pages": [
     "pages/main/main",
     "pages/report/irReport",
+    "pages/report/example",
     "pages/buyCar/buyCar",
     "pages/user/user",
     "pages/feedback/feedback",
@@ -52,6 +53,5 @@
     ]
   },
   "permission": {},
-  "usingComponents": {},
-  "sitemapLocation": "sitemap8.json"
+  "usingComponents": {}
 }
