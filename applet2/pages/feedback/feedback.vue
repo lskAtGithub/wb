@@ -4,7 +4,8 @@
 			<view class="lists">
 				<view class="list" v-for="(item,index) in list" :key="index">
 					<view class="title">{{item.title}}</view>
-					<view class="content">{{item.content}}</view>
+					<view class="content">内容：{{item.content}}</view>
+					<view class="content">答复：{{item.answer || '暂未答复'}}</view>
 				</view>
 			</view>
 			<view class="feed-model" v-show="feedModel"></view>

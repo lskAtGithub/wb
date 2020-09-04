@@ -6,7 +6,7 @@
 			</view>
 			<view class="right-content">
 				<view style="color: #232323;font-size: 30upx;">订单号: {{obj.order_sn}}</view>
-				<view style="font-size: 26upx; color: #cccccc; margin: 20upx 0;">{{item.licenseplate}}</view>
+				<view style="font-size: 26upx; color: #cccccc; margin: 20upx 0;">{{obj.licenseplate}}</view>
 				<view class="right-item"> <text v-for="(item,index) in headList" :key="index" :class="{'active': item.active}" class="right-item-label">{{item.label}}</text> </view>
 			</view>
 		</view>
@@ -21,19 +21,19 @@
 		<view class="table-box">
 			<view class="table-item">
 				<view class="table-label">车险次数</view>
-				<view class="table-value">{{obj.num}}</view>
+				<view class="table-value">{{summaryData.claimCount}}</view>
 			</view>
 			<view class="table-item">
 				<view class="table-label">材料总金额/费用</view>
-				<view class="table-value">{{obj.renewalAmount}}</view>
+				<view class="table-value">{{summaryData.claimMoney}}</view>
 			</view>
 			<view class="table-item">
 				<view class="table-label">理赔总金额</view>
-				<view class="table-value">{{obj.damageMoney}}</view>
+				<view class="table-value">{{summaryData.renewMoney}}</view>
 			</view>
 			<view class="table-item">
 				<view class="table-label">维修总金额/费用</view>
-				<view class="table-value">{{obj.repairAmount}}</view>
+				<view class="table-value">{{summaryData.repairMoney}}</view>
 			</view>
 		</view>
 		<view class="title-box">
@@ -98,18 +98,10 @@
 				},
 				success: (res)=>{
 					that.obj = res.data[0]
-					that.obj.num = 0
-					that.obj.renewalAmount = 0
-					that.obj.damageMoney = 0
-					that.obj.repairAmount = 0
-					that.reportInfo = JSON.parse(res.data[0].report.json_data)
+					that.reportInfo = JSON.parse(res.data[0].report.json_data).result
+					that.summaryData = JSON.parse(res.data[0].report.json_data).summaryData
 					console.log(that.reportInfo);
-					that.reportInfo.forEach((item,index)=>{
-						that.obj.num = index
-						that.obj.renewalAmount += parseFloat(item.renewalAmount)
-						that.obj.damageMoney += parseFloat(item.damageMoney)
-						that.obj.repairAmount += parseFloat(item.repairAmount)
-					})
+					console.log(that.summaryData);
 				}
 			})
 		},
@@ -117,6 +109,7 @@
 			return {
 				obj: {},
 				reportInfo: [],
+				summaryData: {},
 				headList: [
 					{
 						label: '维保',

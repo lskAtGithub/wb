@@ -38,7 +38,7 @@
 			<text @tap="getChuxian" style="text-align: right; font-size: 24upx; color: #007AFF; margin: 0 40upx;">查看出险示例报告</text>
 		</view>
 		<view class="search-box">
-			<view class="search-btn" @tap="pay('mt')">维保查询</view>
+			<view class="search-btn" @tap="search('mt')">维保查询</view>
 			<view class="search-btn" @tap="pay('ir')">出险查询</view>
 		</view>
 		<view class="tips-box">

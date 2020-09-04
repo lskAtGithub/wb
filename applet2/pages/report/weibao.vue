@@ -24,7 +24,7 @@
 					</view>
 				</view>
 				<view class="status">
-					<image v-if="item.status === '1'" src="../../static/img/report-icon.png" class="report-icon" mode=""></image>
+					<image v-if="item.report.status === '1'" src="../../static/img/report-icon.png" class="report-icon" mode=""></image>
 					<image v-else src="../../static/img/waitDown.png" class="report-icon" mode=""></image>
 				</view>
 			</view>
@@ -48,6 +48,7 @@
 		data(){
 			return{
 				page: 1,
+				maxPage: 1,
 				isEmpty: false,
 				reportList: [],
 				topbarList: [
@@ -65,7 +66,10 @@
 		},
 		onReachBottom() {
 			const that = this
-			this.getList()
+			if(that.page <= that.maxPage){
+				that.page++
+				that.getList()
+			}
 		},
 		methods: {
 			...mapMutations(['saveWapUrl']),
@@ -87,7 +91,7 @@
 						res.data.forEach(item=>{
 							that.reportList.push(item)
 						})
-						that.page++
+						that.maxPage = res.maxPage
 					}
 				})
 			},

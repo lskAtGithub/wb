@@ -53,5 +53,6 @@
     ]
   },
   "permission": {},
-  "usingComponents": {}
+  "usingComponents": {},
+  "sitemapLocation": "sitemap92.json"
 }
