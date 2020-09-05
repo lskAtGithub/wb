@@ -65,8 +65,7 @@
 		},
 		onReachBottom() {
 			const that = this
-			if(that.page <= that.maxPage){
-				that.page++
+			if(that.page < that.maxPage){
 				that.getList()
 			}
 		},
@@ -82,15 +81,16 @@
 						check_type: 'mt'
 					},
 					success:(res)=>{
-						if(res.data && res.data.length){
+						if(res.data.items && res.data.items.length){
 							that.isEmpty = false
 						}else{
 							that.isEmpty = true
 						}
-						res.data.forEach(item=>{
+						res.data.items.forEach(item=>{
 							that.reportList.push(item)
 						})
-						that.maxPage = res.maxPage
+						that.maxPage = res.data.maxPage
+						that.page++
 					}
 				})
 			},
