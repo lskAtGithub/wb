@@ -98,7 +98,7 @@
 			},
 			toHFive(item){
 				const that = this
-				if(item.status === '1'){
+				if(item.report.statusz === '1'){
 					that.saveWapUrl(item.report.wap_url)
 					uni.navigateTo({
 						url: './reportDetail'

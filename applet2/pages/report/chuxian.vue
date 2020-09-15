@@ -98,7 +98,7 @@
 			},
 			toHFive(item){
 				const that = this
-				if(item.status === '1'){
+				if(item.report.status === '1'){
 					uni.navigateTo({
 						url: './irReport?order_sn=' + item.order_sn
 					})
