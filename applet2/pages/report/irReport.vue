@@ -97,9 +97,9 @@
 					check_type: 'ir'
 				},
 				success: (res)=>{
-					that.obj = res.data[0]
-					that.reportInfo = JSON.parse(res.data[0].report.json_data).result
-					that.summaryData = JSON.parse(res.data[0].report.json_data).summaryData
+					that.obj = res.data.items[0]
+					that.reportInfo = JSON.parse(res.data.items[0].report.json_data).result
+					that.summaryData = JSON.parse(res.data.items[0].report.json_data).summaryData
 					console.log(that.reportInfo);
 					console.log(that.summaryData);
 				}
