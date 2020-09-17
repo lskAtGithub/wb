@@ -162,7 +162,7 @@
 				const that = this
 				if(that.isBrandName){
 					// 不需要补全
-					that.pay()
+					that.pay('mt')
 				}else{
 					// 需要补全
 					if(that.brandId){
@@ -173,7 +173,7 @@
 								vin: that.vinVal
 							},
 							success: (res)=>{
-								that.pay()
+								that.pay('mt')
 							}
 						})
 					}else{
