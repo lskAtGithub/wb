@@ -100,8 +100,6 @@
 					that.obj = res.data.items[0]
 					that.reportInfo = JSON.parse(res.data.items[0].report.json_data).result
 					that.summaryData = JSON.parse(res.data.items[0].report.json_data).summaryData
-					console.log(that.reportInfo);
-					console.log(that.summaryData);
 				}
 			})
 		},

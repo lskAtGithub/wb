@@ -65,7 +65,7 @@
 		},
 		onReachBottom() {
 			const that = this
-			if(that.page < that.maxPage){
+			if(that.page <= that.maxPage){
 				that.getList()
 			}
 		},
@@ -90,7 +90,6 @@
 							that.reportList.push(item)
 						})
 						that.maxPage = res.data.maxPage
-						that.page++
 					}
 				})
 			},

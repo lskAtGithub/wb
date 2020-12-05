@@ -6,7 +6,6 @@
 	export default {
 		onShow() {
 			this.src = uni.getStorageSync('wapUrl')
-			console.log(this.src);
 		},
 		data(){
 			return {

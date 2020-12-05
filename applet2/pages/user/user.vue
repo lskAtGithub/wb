@@ -102,7 +102,6 @@
 				uni.login({
 				  provider: 'weixin',
 				  success: function (loginRes) {
-						console.log(loginRes);
 					  uni.getUserInfo({
 						provider: 'weixin',
 						success: function (infoRes) {

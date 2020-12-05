@@ -66,7 +66,7 @@
 		},
 		onReachBottom() {
 			const that = this
-			if(that.page < that.maxPage){
+			if(that.page <= that.maxPage){
 				that.page++
 				that.getList()
 			}
@@ -92,13 +92,12 @@
 							that.reportList.push(item)
 						})
 						that.maxPage = res.data.maxPage
-						that.page++
 					}
 				})
 			},
 			toHFive(item){
 				const that = this
-				if(item.report.statusz === '1'){
+				if(item.report.status === '1'){
 					that.saveWapUrl(item.report.wap_url)
 					uni.navigateTo({
 						url: './reportDetail'

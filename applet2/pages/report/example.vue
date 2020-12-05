@@ -104,7 +104,6 @@
 					that.obj.damageMoney = 0
 					that.obj.repairAmount = 0
 					that.reportInfo = JSON.parse(res.data[0].report.json_data)
-					console.log(that.reportInfo);
 					that.reportInfo.forEach((item,index)=>{
 						that.obj.num = index
 						that.obj.renewalAmount += parseFloat(item.renewalAmount)
